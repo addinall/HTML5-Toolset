@@ -161,7 +161,7 @@ require_once('oop/html5.php');                              // load our HTML5 do
                 $application->cms('index', 'footer');       // add the content
             $application->close_footer();                   // and close it
         $application->close_wrapper();                      // close out wrapper
-    $application->end_body();                               // close out the body
+    $application->close_body();                             // close out the body
 $application->close_HTML5();                                // close off the application
 $application->run();                                        // go and do it then
 ?>
