@@ -5,7 +5,7 @@
 //---------------------------------------------------------
 //
 //  FILE:       index.php 
-//  SYSTEM:     My new Websiite 
+//  SYSTEM:     New Toolset 
 //  AUTHOR:     Mark Addinall
 //  DATE:       22/03/2013
 //  SYNOPSIS:   I put up a HTML website for myself in
@@ -34,6 +34,9 @@
 //              I have catered for IE8, but only just.  I don't
 //              care about older browsers.  This is a HTML5 / CSS3
 //              Framework and system.  It requires PHP 5.x
+//
+//              The AJaX routines, DOM manipulation and dynamic forms are all
+//              coded using the jQuery Javascript library.
 //              
 //              It was developed using PHP 5.4.13 (cli)
 //              I like to debug on the command line.  MUCH

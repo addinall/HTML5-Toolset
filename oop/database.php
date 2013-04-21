@@ -360,6 +360,7 @@ private     $hostname;
     // $table_list = $database->fetch_all();
 
         $result = new ResultArray();                            // container to send upstairs
+
         if ($this->db_type == 'mySQL') {
 
         }
