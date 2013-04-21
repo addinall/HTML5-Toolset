@@ -5,18 +5,10 @@
 //---------------------------------------------------------
 //
 //	FILE:       html5.php 
-//	SYSTEM:     My new Websiite 
+//	SYSTEM:     New Tools 
 //	AUTHOR:     Mark Addinall
 //	DATE:       22/03/2013
-//	SYNOPSIS:   I put up a HTML website for myself in
-//              2002.  I put about six hours worth of
-//              work into it and never touched it again.
-//              It looks and feels like crap, but I never
-//              seemed to have the time nor inclination
-//              to do anything about it!  So, 11 years on,
-//              let's address this.
-//
-//              This is going to be a RESPONSIVE, lightweight
+//	SYNOPSIS:   This is going to be a RESPONSIVE, lightweight
 //              site based on CSS3 and HTML5.  I have been 
 //              playing with this technology in the past,
 //              so it is time to implement it in a BRAND
@@ -44,17 +36,133 @@
 //
 
 //----------------------
-class HTML5_document() {
+class HTML5_document {
 
 private $document;          // basic HTML document
 private $ajax;              // do we require AJaX?
+private $content;           // a private copy of the content manager
+                            // passed IN as REFERENCE
 
-    //-------------------------
-    function HTML5_document() {
+    //-----------------------------------------
+    public function __construct(CMS $content) {
 
+        $this->content = $content;                  // make a private copy to use
         $this->document = "<!DOCTYPE html5>\n\n";   // standard lead in
         $ajax = FALSE;                              // turn off AJaX by default
+    
     }
+
+    //----------------------------
+    public function start_head() {
+
+        $this_document .= "<head>\n\n";
+
+    }
+
+    //---------------------------------
+    public function load_javascript() {
+
+    }
+
+
+    //------------------------
+    public function fix_IE() {
+
+
+    }
+
+
+    //----------------------------
+    public function load_theme() {
+
+
+    }
+
+
+    //----------------------------
+    public function close_head() {
+
+
+    }
+
+
+    //----------------------------
+    public function start_body() {
+
+
+    }
+
+
+    //-------------------------------
+    public function start_wrapper() {
+
+
+    }
+
+
+    //----------------------------   
+    public function add_header() {
+
+
+    }
+
+
+    //--------------------------
+    public function add_logo() {
+
+
+    }
+
+
+    //----------------------------
+    public function close_logo() {
+
+
+    }
+
+    //---------------------------
+    public function add_heros() {
+
+
+    }
+
+
+    //-----------------------------
+    public function close_heros() {
+
+
+    }
+
+
+    //-------------------------------
+    public function close_headers() {
+
+
+    }
+
+
+    //------------------------------------
+    public function cms($page, $section) {
+
+        $this->document .= $this->content->get_content($page, $section);
+        $this->document .= "\n\n";
+    }
+
+
+    //--------------------------------------------------
+    public function implement_ajax($function_callback) {
+
+
+    }
+
+
+    //-------------------------------------
+    public function add_comment($comment) {
+
+        $this->document .= "\n\n <!--  \n $comment \n --> \n\n";
+
+    }
+
 }
 
 ?>

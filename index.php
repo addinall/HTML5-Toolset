@@ -121,7 +121,7 @@ require_once('oop/html5.php');                              // load our HTML5 do
                                                             // HTML5/CSS3 RESPONSIVE application
         $application->load_theme();                         // load the correct CSS instructions
                                                             // and the right set of images etc.
-    $application->end_head();                               // close the head section
+    $application->close_head();                             // close the head section
 
     $application->start_body();
         $application->start_wrapper();                      // as all of this application (and future
@@ -132,7 +132,7 @@ require_once('oop/html5.php');                              // load our HTML5 do
             $application->add_header();                     // the HEADING section, NOT  <head>
                 $application->add_logo();                   // the logo, can be empty
                     $application->cms('index','logo');      // insert the content.  images and forms if
-                $application->end_logo();                   // shut down the logo div
+                $application->close_logo();                 // shut down the logo div
                 $application->add_heros();                  // HERO slider section, can be blank
                     $application->cms('index','hero');      // insert the content.  images and forms if
                 $application->close_heros();                // shut down banner slider
@@ -160,9 +160,9 @@ require_once('oop/html5.php');                              // load our HTML5 do
             $application->add_footer();                     // finally, add the footer
                 $application->cms('index', 'footer');       // add the content
             $application->close_footer();                   // and close it
-        $application->end_wrapper();                        // close out wrapper
+        $application->close_wrapper();                      // close out wrapper
     $application->end_body();                               // close out the body
-$application->end_HTML5();                                  // close off the application
+$application->close_HTML5();                                // close off the application
 $application->run();                                        // go and do it then
 ?>
 
