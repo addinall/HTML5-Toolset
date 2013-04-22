@@ -84,86 +84,99 @@
 //
 //
 
-require_once('conf/config.php');                            // this has some very basic primitives
-                                                            // described.  Name of the database,
-                                                            // base URL, type of database and other
-                                                            // runtime options.  the file is simple,
-                                                            // and this is the ONLY configuration
-                                                            // file we use in this framework.
-                                                            // ALL of the information is encapsulated
-                                                            // into the methods and properties of ONE
-                                                            // Configuration object.  We don't have many
-                                                            // configuration options.  KISS.
+require_once('conf/config.php');                                    // this has some very basic primitives
+                                                                    // described.  Name of the database,
+                                                                    // base URL, type of database and other
+                                                                    // runtime options.  the file is simple,
+                                                                    // and this is the ONLY configuration
+                                                                    // file we use in this framework.
+                                                                    // ALL of the information is encapsulated
+                                                                    // into the methods and properties of ONE
+                                                                    // Configuration object.  We don't have many
+                                                                    // configuration options.  KISS.
 
-require_once('lib/prepare.inc');                            // this is required by the IBM DB2 API
+require_once('lib/prepare.inc');                                    // this is required by the IBM DB2 API
 
-require_once('oop/error.php');                              // error logging object
-require_once('oop/database.php');                           // database connectivity object
-require_once('oop/cms.php');                                // Content Management System primities
-require_once('oop/forms.php');                              // tricky dynamic forms
-require_once('oop/widgets.php');                            // a collection (small) of widget objects.
-require_once('oop/html5.php');                              // load our HTML5 document object
-                                                            // small footprint and fast loading
+require_once('oop/error.php');                                      // error logging object
+require_once('oop/database.php');                                   // database connectivity object
+require_once('oop/cms.php');                                        // Content Management System primities
+require_once('oop/forms.php');                                      // tricky dynamic forms
+require_once('oop/widgets.php');                                    // a collection (small) of widget objects.
+require_once('oop/html5.php');                                      // load our HTML5 document object
+                                                                    // small footprint and fast loading
 
-    $logger         = new ErrorLogger($configuration);      // turn on the error system first
-    $database       = new DBMS($logger);                    // fire up the database with details
-                                                            // collected from config.php
-    $content        = new CMS($database);                   // fire up the Content Management system
+    $logger         = new ErrorLogger($configuration);              // turn on the error system first
+    $database       = new DBMS($logger);                            // fire up the database with details
+                                                                    // collected from config.php
+    $content        = new CMS($database);                           // fire up the Content Management system
 
-    $application    = new HTML5($content);                  // and create the application
+    $application    = new HTML5($content);                          // and create the application
 
-    $application->start_head();                             // start the <head> section
-        $application->load_javascript();                    // and load the correct Javascript library
-                                                            // for this application.  NB.  there will
-                                                            // be more javascript loads in THEMES
-                                                            // and FORMS.
-        $application->fix_IE();                             // munge to make IE behave in a
-                                                            // HTML5/CSS3 RESPONSIVE application
-        $application->load_theme();                         // load the correct CSS instructions
-                                                            // and the right set of images etc.
-    $application->close_head();                             // close the head section
+    $application->start_head();                                     // start the <head> section
+        $application->load_javascript();                            // and load the correct Javascript library
+                                                                    // for this application.  NB.  there will
+                                                                    // be more javascript loads in THEMES
+                                                                    // and FORMS.
+        $application->fix_IE();                                     // munge to make IE behave in a
+                                                                    // HTML5/CSS3 RESPONSIVE application
+        $application->load_theme();                                 // load the correct CSS instructions
+                                                                    // and the right set of images etc.
+    $application->close_head();                                     // close the head section
 
     $application->start_body();
-        $application->start_wrapper();                      // as all of this application (and future
-                                                            // applications) will have the look and
-                                                            // feel completely driven by CSS3
-                                                            // with a little jQuery to handle forms
-                                                            // and IE, this outline need not ever change.
-            $application->add_header();                     // the HEADING section, NOT  <head>
-                $application->add_logo();                   // the logo, can be empty
-                    $application->cms('index','logo');      // insert the content.  images and forms if
-                $application->close_logo();                 // shut down the logo div
-                $application->add_heros();                  // HERO slider section, can be blank
-                    $application->cms('index','hero');      // insert the content.  images and forms if
-                $application->close_heros();                // shut down banner slider
-            $application->close_header();                   // and close of the HEADER div
-            $applications->add_column_one();                // this is a ONE to TWO column application,
-                                                            // with the CSS theming, and the content that
-                                                            // has been added in the CMS system, the code here
-                                                            // doesn't change when developing a new application.
-                                                            // that way, we only ever get to fix syntax errors
-                                                            // and spelling mistakes once, not every
-                                                            // application we write.  This will change into
-                                                            // a THREE column model in the near future when
-                                                            // I have the RESPONSIVENESS mapped out without
-                                                            // errors on a few devices and screen sizes.
-                $application->cms('index', 'col_one');      // insert the content.  images and forms if
-                                                            // used are directly coded into the content
-                                                            // using HTML5.  NO inline CSS allowed
-            $application->close_column_one();               // close of first column
-            $application->add_column_two();                 // second screen part
-                $application->add_widget('social_buttons'); // stick the various 'likes' in the column, change this to suit
-                $application->cms('index', 'col_two');      // add the content
-                $application->add_widget('flickr');         // add a flickr widget, change this to suit
-            $application->close_column_two();               // and close it
+        $application->start_wrapper();                              // as all of this application (and future
+                                                                    // applications) will have the look and
+                                                                    // feel completely driven by CSS3
+                                                                    // with a little jQuery to handle forms
+                                                                    // and IE, this outline need not ever change.
+            $application->add_header();                             // the HEADING section, NOT  <head>
+                $application->add_logo();                           // the logo, can be empty
+                    $application->cms('index','logo');              // insert the content.
+                    $application->cms('index','description');       // logo and description
+                $application->close_logo();                         // shut down the logo div
+                $application->add_navigation();                     // whatever nav structure the theme defines
+                    $application->add_nav_item("Home","#");         // start to build the menu
+                    $application->add_nav_item("eHealth",
+                                    "http://ehealth.addinall.org");
+                    $application->add_nav_item("Movies",
+                                    "http://movies.addinall.org");
+                    $application->add_nav_item("DJs",
+                                    "http://www.crosscitydjs.com.au");
+                    $application->add_nav_item("Contact",
+                                                "contact.php");
+                $application->close_navigation();                   // close off the menu
+                $application->add_heros();                          // HERO slider section, can be blank
+                    $application->cms('index','hero');              // insert the content.  images and forms if
+                $application->close_heros();                        // shut down banner slider
+            $application->close_header();                           // and close of the HEADER div
+            $applications->add_column_one();                        // this is a ONE to TWO column application,
+                                                                    // with the CSS theming, and the content that
+                                                                    // has been added in the CMS system, the code here
+                                                                    // doesn't change when developing a new application.
+                                                                    // that way, we only ever get to fix syntax errors
+                                                                    // and spelling mistakes once, not every
+                                                                    // application we write.  This will change into
+                                                                    // a THREE column model in the near future when
+                                                                    // I have the RESPONSIVENESS mapped out without
+                                                                    // errors on a few devices and screen sizes.
+                $application->cms('index', 'col_one');              // insert the content.  images and forms if
+                                                                    // used are directly coded into the content
+                                                                    // using HTML5.  NO inline CSS allowed
+            $application->close_column_one();                       // close of first column
+            $application->add_column_two();                         // second screen part
+                $application->add_widget('social_buttons');         // stick the various 'likes' in the column, 
+                                                                    // change this to suit
+                $application->cms('index', 'col_two');              // add the content
+                $application->add_widget('flickr');                 // add a flickr widget, change this to suit
+            $application->close_column_two();                       // and close it
 
-            $application->add_footer();                     // finally, add the footer
-                $application->cms('index', 'footer');       // add the content
-            $application->close_footer();                   // and close it
-        $application->close_wrapper();                      // close out wrapper
-    $application->close_body();                             // close out the body
-$application->close_HTML5();                                // close off the application
-$application->run();                                        // go and do it then
+            $application->add_footer();                             // finally, add the footer
+                $application->cms('index', 'footer');               // add the content
+            $application->close_footer();                           // and close it
+        $application->close_wrapper();                              // close out wrapper
+    $application->close_body();                                     // close out the body
+$application->close_HTML5();                                        // close off the application
+$application->run();                                                // go and do it then
 ?>
 
 

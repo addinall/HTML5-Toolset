@@ -26,6 +26,18 @@
 //
 //              This object forms the basis for the HTML5 application.
 //
+//              Why do it in PHP and not in plain ol' HTML?  A number
+//              of reasons:
+//              1.  Ass this is an APPLICATION framwork and not just
+//                  a web page builder, we rely a great deal on the
+//                  ability to use and manipulate dynamic data.  Having
+//                  the framework built in modern PHP5 facilitates
+//                  the process of Rapid Application Design.
+//              2.  Having strict control over the syntax of the HTML
+//                  generated we can ensure well formed HTML5 "out
+//                  of the box" that will validate (W3C) and execute
+//                  without error.
+//
 //
 //------------+-------------------------------+------------
 // DATE       |    CHANGE                     |    WHO
@@ -35,6 +47,19 @@
 //
 //
 
+//---------------------------------
+private function tabs($tab_count) {
+
+    // this is just an aide to provide us
+    // with "pretty printing" during HTML
+    // code generation.
+
+
+    return str_repeat("\t", $tab_count);
+}
+
+
+
 //----------------------
 class HTML5_document {
 
@@ -42,6 +67,9 @@ private $document;          // basic HTML document
 private $ajax;              // do we require AJaX?
 private $content;           // a private copy of the content manager
                             // passed IN as REFERENCE
+private $tab_count;         // used to format generated HTML.  The code still
+                            // needs to be human readable AFTER generation.
+
 
     //-----------------------------------------
     public function __construct(CMS $content) {
@@ -56,13 +84,18 @@ private $content;           // a private copy of the content manager
     public function start_head() {
 
         $this_document .= "<head>\n\n";
-        $this->document .= "<meta charset='utf-8'> \n\n";
+        $this->tab_count++;
+        $this->document .= $this->tabs($this->tab_count) . 
+                            "<meta charset='utf-8'> \n\n";
 
         // disable iPhone inital scale
+        // and set up the view port area to reflect the size of the device we are on
 
-        $this->document .= "<meta name='viewport' content='width=device-width; initial-scale=1.0'> \n\n";
+        $this->document .= $this->tabs($this->tab_count) . 
+                        "<meta name='viewport' content='width=device-width; initial-scale=1.0'> \n\n";
 
-        $this->document .= "<title>Toolset v4.0 - HTML5/CSS3/jQuery - Mark Addinall</title> \n\n";
+        $this->document .= $this->tabs($this->tab_count) . 
+                        "<title>Toolset v4.0 - HTML5/CSS3/jQuery - Mark Addinall</title> \n\n";
 
 
     }
@@ -73,11 +106,13 @@ private $content;           // a private copy of the content manager
         // jQuery 1.9 is significantly different to earlier versions
         // this may take some testing
 
-        $this->document .= "<script src='js/jquery-1.9.1.min.js'></script> \n\n";
+        $this->document .= $this->tabs($this->tab_count) . 
+                            "<script src='js/jquery-1.9.1.min.js'></script> \n\n";
        
         // now for our brand new mini hero slider
 
-        $this->document .= "<script src='js/hero.js'></script> \n\n";
+        $this->document .= $this->tabs($this->tab_count) . 
+                            "<script src='js/hero.js'></script> \n\n";
 
     }
 
@@ -89,13 +124,16 @@ private $content;           // a private copy of the content manager
         // copies of IE8 still running out in the world. This Javascript makes it behave.
 
 
-        $this->document .= "<!--[if lt IE 9]> \n <script src='http://html5shim.googlecode.com/svn/trunk/html5.js'></script>\n <![endif]-->\n\n";
+        $this->document .= $this->tabs($this-tab_count) . 
+        "<!--[if lt IE 9]> \n <script src='http://html5shim.googlecode.com/svn/trunk/html5.js'>"  . 
+            "</script>\n <![endif]-->\n\n";
 
         // IE8 ALSO doesn't like the CSS media queries that are used to drive the
         // RESPONSIVE bits of the Framework/Toolset.  This next bit of Javascript
         // adds that functionality to IE8.
 
-        $this->document .= "<script src='http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js'></script> \n\n";
+        $this->document .= $this->tabs($this->tab_count) . 
+            "<script src='http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js'></script> \n\n";
 
 
     }
@@ -107,15 +145,18 @@ private $content;           // a private copy of the content manager
 
         // main css theme
         
-        $this->document .= "<link href='themes/' . $this->content->get_theme() . '/style.css' rel='stylesheet' type='text/css'> \n";
+        $this->document .= $this->tabs($this->tab_count) . 
+            "<link href='themes/' . $this->content->get_theme() . '/style.css' rel='stylesheet' type='text/css'> \n";
 
         // media queries css
 
-        $this->document .= "<link href='themes/' . $this->content->get_theme() . '/media-queries.css' rel='stylesheet' type='text/css'> \n\n";
+        $this->document .= $this->tabs($this->tab_count) . 
+            "<link href='themes/' . $this->content->get_theme() . '/media-queries.css' rel='stylesheet' type='text/css'> \n\n";
 
         // css theme for the hero slider
         
-        $this->document .= "<link href='themes/' . $this->content->get_theme() . '/hero.css' rel='stylesheet' type='text/css'> \n\n";
+        $this->document .= $this->tabs($this->tab_count) . 
+            "<link href='themes/' . $this->content->get_theme() . '/hero.css' rel='stylesheet' type='text/css'> \n\n";
 
     }
 
@@ -123,6 +164,7 @@ private $content;           // a private copy of the content manager
     //----------------------------
     public function close_head() {
 
+        $this->tab_count--;
         $this->document .= "</head> \n\n";
 
     }
@@ -131,13 +173,16 @@ private $content;           // a private copy of the content manager
     //----------------------------
     public function start_body() {
 
-
+        $this->document .= "<body> \n\n";
+        $this->tab_count++;
     }
 
 
     //-------------------------------
     public function start_wrapper() {
 
+        $this->document .= $this->tabs($this->tabcount) . "<div id='wrapper'> \n";
+        $this->tab_count++;
 
     }
 
@@ -145,6 +190,8 @@ private $content;           // a private copy of the content manager
     //----------------------------   
     public function add_header() {
 
+        $this->document .= $this->tabs($this->tab_count) . "<header id='header'> \n";
+        $this->tab_count++;
 
     }
 
@@ -152,7 +199,9 @@ private $content;           // a private copy of the content manager
     //--------------------------
     public function add_logo() {
 
-
+        $this->document .= $this->tabs($this->tab_count) . "<hgroup> \n";
+        $this->tab_count++;
+        
     }
 
 
@@ -201,7 +250,13 @@ private $content;           // a private copy of the content manager
     //-------------------------------------
     public function add_comment($comment) {
 
-     Google that    $this->document .= "\n\n <!--  \n $comment \n --> \n\n";
+    // this allows us to insert a comment into the HTML5
+    // that is being generated.  This is useful for
+    // providing run time documentation and for debugging
+    // purposes.
+
+
+        $this->document .= "\n\n <!--  \n $comment \n --> \n\n";
 
     }
 
@@ -220,8 +275,6 @@ private $content;           // a private copy of the content manager
 
 
     }
-
-
 
 }
 
