@@ -54,7 +54,6 @@ private function tabs($tab_count) {
     // with "pretty printing" during HTML
     // code generation.
 
-
     return str_repeat("\t", $tab_count);
 }
 
@@ -206,8 +205,20 @@ private $tab_count;         // used to format generated HTML.  The code still
 
 
     //----------------------------
+    public function build_logo() {
+
+			$this->document .= $this->tabs($this->tab_count) . 
+                "h1 id='site-logo'>$this->content->get('index','logo')<a href='#'></a></h1> \n";
+			$this->document .= $this->tabs($this-tab_count) . 
+                "<h2 id='site-description'>$this->content->get('index', 'description')</h2> \n";
+
+    }
+
+    //----------------------------
     public function close_logo() {
 
+        $this->tab_count--;
+        $this->document .= $this->tabs($this->tab_count) . "</hgroup> \n";
 
     }
 
@@ -231,13 +242,6 @@ private $tab_count;         // used to format generated HTML.  The code still
 
     }
 
-
-    //------------------------------------
-    public function cms($page, $section) {
-
-        $this->document .= $this->content->get_content($page, $section);
-        $this->document .= "\n\n";
-    }
 
 
     //--------------------------------------------------
