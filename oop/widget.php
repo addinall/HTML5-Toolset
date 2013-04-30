@@ -48,16 +48,25 @@
 // 30/04/2013 | Re-write v4 new object model  |  MA
 //------------+-------------------------------+------------
 
-
+//------------
 class Widget {
+
+
+// this object contains some lightweight commonly used widgets
+// that are called from the framework.  Because the methods
+// are so small, I decided to encapsulate the lot into one object
+// rather than have several Widget classes.  This MAY change if
+// my number of Widgets increases dramatically, or the same
+// happens to the size/complexity.  I can't see this happening
+// at the moment.
 
 private $facebook_javascript;
 private $facebook_html5;
 
-
+    //-----------------------------
     public function __construct() {
 
-        $this->facebook_javescript =<<<EOT
+        $this->facebook_javascript =<<<EOT
             <div id="fb-root"></div>
             <script>(function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
@@ -66,10 +75,34 @@ private $facebook_html5;
             js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
             fjs.parentNode.insertBefore(js, fjs);
                 }(document, 'script', 'facebook-jssdk'));</script>
+
+EOT;
+
+
+        $this->facebook_html5 =<<<EOT
+            <div class="fb-like" data-href="http://www.addinall.net/ehealth" 
+                data-send="false" data-layout="button_count" data-width="280" 
+                data-show-faces="true" data-font="tahoma">
+            </div>
+
 EOT;
 
     }
 
+    //-----------------------------------------
+    public function add_widget($which_widget) {
+
+        switch($which_widget) {
+            case 'social_buttons':
+                // add all of the social buttons in one group
+
+                break;
+
+            case 'facebook':
+
+    }
+
+    
 
 }
 

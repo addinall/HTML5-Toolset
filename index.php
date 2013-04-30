@@ -111,6 +111,8 @@ require_once('oop/html5.php');                                      // load our 
     $content        = new CMS($database);                           // fire up the Content Management system
 
     $application    = new HTML5($content);                          // and create the application
+                                                                    // there is a Widget class encapsulated
+                                                                    // in this object
 
     $application->start_head();                                     // start the <head> section
         $application->load_javascript();                            // and load the correct Javascript library
