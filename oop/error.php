@@ -114,10 +114,36 @@ private $trace_file;            // the system message file
             die("Your configuration file example is illegal.  In your config.php file your error and " .
                 "log locations parse to " . $error_location  .  "  You can not continue until this is " .
                 "attended to.  Please see your System Administrator. \n\n ");
-        }
+        }                                                           // something important here, first mention,
+                                                                    // but we mention the subject in various locations.
+                                                                    // a younger protoge asked "YUK!  Why didn't
+                                                                    // you use a REGEX here".  Goog question.  Firstly,
+                                                                    // REGEX LOOKS like it should be faster, but in
+                                                                    // CPU cycles, it is a fair bit slower than
+                                                                    // strpos.  Secondly, and more importantly,
+                                                                    // since this application aims to be (and is)
+                                                                    // machine agnostic, OS agnostic and DBMS
+                                                                    // agnostic, we MUST bear in mind throughout the
+                                                                    // development that the IBM mid range and the brand
+                                                                    // spanking new BIG Iron still run the EBCDIC
+                                                                    // character set.  The ordinal values are VERY
+                                                                    // different.  Also, people tend to forget in
+                                                                    // our modern world that the alphabets in the 
+                                                                    // EBCDIC charater set are not contiguous.  So,
+                                                                    // [a..j][p..x] ain't going to work.  Stuff like
+                                                                    // this also fails.
+                                                                    // $char = 'i'; $char++; echo $char;
+                                                                    // It isn't going to be what you expect.
+                                                                    // So no.  I am not scared of REGEX or tricky
+                                                                    // Perl looking control loops.  This is the
+                                                                    // MAIN reason moder teams have such a hard time
+                                                                    // getting applications to work on big blue.
+                                                                    // sort() does weird things as does date().
+                                                                    // End of warning.
 
-        $this->error_file = $error_location . "matools_error.log";  // OK, we hard code the ACTUAL names
-        $this->trace_file = $error_location . "matools_trace.log";  // but leave the location up to the user
+
+        $this->error_file = $error_location . "tools_error.log";    // OK, we hard code the ACTUAL names
+        $this->trace_file = $error_location . "tools_trace.log";    // but leave the location up to the user
                                                                     // of this framework
         
         if (! $this->error_fd = fopen($this->error_file, "at"))  {  // try and open the error file to append text 
