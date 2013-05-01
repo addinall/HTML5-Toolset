@@ -90,21 +90,23 @@
 //------------+-------------------------------+------------
 
 //-----------------
-class ResultArray {             // little object looks kinda weird, it
-                                // serving as a container for an array
-                                // of SQL results.
+class ResultArray {                 // little object looks kinda weird, it
+                                    // serving as a container for an array
+                                    // of SQL results.
 
-private $table = array();       // table of SQL results
-                        
+//----------------------
+private $table = array();           // table of SQL results
+                       
+    //----------------------
     function __construct() {
         // nothing to do
     }
 
+    //----------------------------
     public function push($value) {
-        $table() = $value;
-    }
-
-}
+        $this->table() = $value;    // PUSH onto stack.  PHP looks after
+    }                               // the memory management
+} // end ResultArray
 
 
 
@@ -325,7 +327,9 @@ private     $mongo_fp;
         }
         //----------------------------------------------------------
         else if ($this->db_type == 'Mongo') {                           // Mongo LOOKS similar on the outside.
-            $result = pg_query($sql);                                   // internals are VERY different
+            $result =
+
+
             if (!$result) {                                             // Mongo is flavour of the month so
                 $this->log_config->error('Query failed: ' . $sql .      // we are here a little sooner than I
                                         ' : ' . pg_last_error(), TRUE); // expected.
@@ -443,7 +447,7 @@ private     $mongo_fp;
         return $this->alive ;
     }
 
-} // class Database 
+} // class DBMS 
 
 
 
