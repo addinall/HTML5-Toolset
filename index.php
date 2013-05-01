@@ -13,8 +13,8 @@
 //              work into it and never touched it again.
 //              It looks and feels like crap, but I never
 //              seemed to have the time nor inclination
-//              to do anything about it!  So, 11 years on,
-//              let's address this.
+//              to do anything about it!  
+//              So, 11 years on, let's address this.
 //
 //              This is going to be a RESPONSIVE, lightweight
 //              site based on CSS3 and HTML5.  I have been 
@@ -44,6 +44,39 @@
 //
 //              The framework produces well formed HTML5 and CSS3
 //              that validate out of the box (W3C standards).
+//
+//              WHY do I code my framework using a classic OOD/OOP
+//              paradigm aka OBJECTs that ENCAPSULATE like METHODS
+//              and PROPERTIES.  All of the PROPERTIES within the
+//              OBJECTs are accessable by MUTATORs and ACCESSORs
+//              rather than an MVC architecture?
+//
+//              1.  MVC isn't OOD/OOP.  Not even close.  I really do
+//                  not understand HOW people can mention the two
+//                  approaches in the same breath.
+//              2.  MVC produces crap code that is a nightmare to
+//                  debug and maintain.  FAR too many methods are
+//                  hidden from plain view.  There is no relation
+//                  to Top Down Stepwise Refinement techniques
+//                  that were the Grandaddy of OOD circa Ada.
+//                  Or even PL/1.
+//              3.  MVC is arse about.  GOOD computer programs
+//                  worry about the DATA structures first AND
+//                  THEN build the OOP structures around clean
+//                  and simple DATA STRUCTURES.  I would have thought
+//                  this a bit obvious.  MVC tacks on database at the
+//                  very end of the show.  And you end up with
+//                  40 line cursors sprinkled through the code
+//                  doing an obscene amount of JOINS, UNIONS and
+//                  other such crap.  Not required.
+//                  Algorithms + Data STructures = Programs
+//                  Niklaus Wirth - 1985
+//
+//                  "Yet, this book starts with a chapter on data 
+//                  structure for two reasons. First, one has an 
+//                  intuitive feeling that data precede algorithms: 
+//                  you must have some objects before you can perform 
+//                  operations on them." 
 //
 //              Markup CAN be added to the text that form the
 //              Content sections of the application, however
