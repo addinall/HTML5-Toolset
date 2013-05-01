@@ -112,7 +112,7 @@ private $user;              // who am I?
 private $password;          // database password for the CMS
 private $database;          // database name, qualified
 private $hostname;          // hostname, qualified
-private $db_type;           // mySQL, ORACLE, DB2, PostgreSQL so far
+private $db_type;           // mySQL, ORACLE, DB2, PostgreSQL so far (added Mongo)
 private $stream;            // this is a socket() pointer returned by the DBMS
 private $root_dir;          // execution root directory
 private $theme;             // CSS3 Skin to use.  This can change on the fly
@@ -317,7 +317,7 @@ $configuration = New Config('addinall',                 // database username
                             'S0laris7.1',               // database password for the CMS
                             'chameleon',                // database name, qualified
                             'localhost',                // local host does it for 90% of installs
-                            'mySQL',                    // mySQL, ORACLE, DB2, PostgreSQL so far
+                            'mySQL',                    // mySQL, ORACLE, DB2, PostgreSQL so far (added Mongo)
                             '',                         // this is a socket() pointer returned by the DBMS
                             'Light',                    // CSS3 Skin to use.  This can change on the fly
                             '/var/www/html/newsite/',   // execution root directory, TRAILING SLASH IMPORTANT!

@@ -86,6 +86,7 @@
 // 18/02/2010 | Re-write CITEC (unfinished)   |  MA
 // 12/02/2012 | Re-write v3.x new object model|  MA
 // 16/04/2013 | Re-write v4 new object model  |  MA
+// 02/05/2013 | Added support for Mongo noSQL |  MA
 //------------+-------------------------------+------------
 
 //-----------------
@@ -102,6 +103,7 @@ private $table = array();       // table of SQL results
     public function push($value) {
         $table() = $value;
     }
+
 }
 
 
@@ -119,6 +121,12 @@ class DBMS {
 // Going to add a noSQL database in a later version
 // and also add support for MS-SQL.
 //
+// I had a couple of requests from people wanting
+// to build 'cloudy' applications so I decided
+// to implement support for Mongo noSQL in this
+// version.  Might as well since it is a re-development
+// pretty much from concepts.
+//
 // Investigating persistant LOCAL databases on
 // mobile devices.  The implementation of this
 // technology is a few minor versions in the future.
@@ -129,12 +137,14 @@ class DBMS {
 private     $alive;
 private     $result;
 private     $log_config;
-private     $user;
-private     $database;
-private     $db_type;
-private     $password;
-private     $stream;
-private     $hostname;
+
+private     $user;              // these are all of the DB connect
+private     $database;          // variables
+private     $db_type;           // the needs of different databases
+private     $password;          // change so on occasion some of
+private     $stream;            // this will remain empty for the
+private     $hostname;          // duration of the application
+private     $mongo_fp;
 
     //------------------------------------------
     function __construct(ErrorLogger $logger) {
@@ -198,6 +208,22 @@ private     $hostname;
                 }                                               // I like the msqli OOP implementation so
                                                                 // we are using that API
             }                                                   // end of mySQL
+            //------------------------------------------------------------------------------------------
+            if ($this->db_type == 'Mongo') {                    // cater for trendy new database
+                $this->mongo_fp =                               // looks a lot like old CISAM to me...
+                    new mongo ( $this->hostname);               // wrapped up in an object.  I seem 
+                if (!$this->mongo_fp) {
+                    $this->log_config->error('Database not started : New mongo failed', TRUE);
+                }                                              
+                                                                // Mongo is a two part connect
+                                                                // like the others USED to be.
+                                                                // BAH!  Just as it all got simpler!
+                $this->stream = $this->mongo_fp->{$this->database};
+                if (!$this->stream) {
+                    $this->log_config->error('Database not started : DBNAME failed', TRUE);
+                }                                              
+
+            }                                                   // end of  Mongo
             //------------------------------------------------------------------------------------------
             else if ($this->db_type == 'postgreSQL') {          // horrid old fashioned wreck of a database
 
@@ -298,6 +324,14 @@ private     $hostname;
             }                                                           // for web sites.
         }
         //----------------------------------------------------------
+        else if ($this->db_type == 'Mongo') {                           // Mongo LOOKS similar on the outside.
+            $result = pg_query($sql);                                   // internals are VERY different
+            if (!$result) {                                             // Mongo is flavour of the month so
+                $this->log_config->error('Query failed: ' . $sql .      // we are here a little sooner than I
+                                        ' : ' . pg_last_error(), TRUE); // expected.
+            }                                                         
+        }
+        //----------------------------------------------------------
         else if ($this->db_type == 'ORACLE') {              
             $plan = oci_parse($this->stream, $sql);                     // OK, ORACLE is a little different            
             if (!$plan) {                                               // to mySQL and postgreSQL again. It has
@@ -334,6 +368,9 @@ private     $hostname;
     // UNIQUE row in a table.
 
         if ($this->db_type == 'mySQL') {
+
+        }
+        else if ($this->db_type == 'Mongo') {
 
         }
         else if ($this->db_type == 'postgreSQL') {
@@ -373,11 +410,17 @@ private     $hostname;
         else if ($this->db_type == 'DB2') {
 
         }
+
+        return $result;
+
     } //  fetch
     //--------------------------------------
     public function close() {
 
         if ($this->db_type == 'mySQL') {
+
+        }
+        else if ($this->db_type == 'Mongo') {
 
         }
         else if ($this->db_type == 'postgreSQL') {
