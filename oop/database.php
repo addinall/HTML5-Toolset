@@ -127,7 +127,14 @@ class DBMS {
 // to build 'cloudy' applications so I decided
 // to implement support for Mongo noSQL in this
 // version.  Might as well since it is a re-development
-// pretty much from concepts.
+// pretty much from concepts.  For the sake of this
+// initial development, all DB instances for both development
+// and testing will be v2.4.3.
+//
+// This now begs the question "do we translate the JSON that
+// comes back from Mongo into a traditional ROWTYPE% OBJECT
+// or do we translate the results from the traditional engines
+// (SQL) into JSON?  It has to be one or the other.
 //
 // Investigating persistant LOCAL databases on
 // mobile devices.  The implementation of this
