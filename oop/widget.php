@@ -66,7 +66,7 @@ private $facebook_html5;
     //-----------------------------
     public function __construct() {
 
-        $this->facebook_javascript =<<<EOT
+        $this->facebook_javascript <<<EOT
             <div id="fb-root"></div>
             <script>(function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
@@ -79,7 +79,7 @@ private $facebook_html5;
 EOT;
 
 
-        $this->facebook_html5 =<<<EOT
+        $this->facebook_html5 <<<EOT
             <div class="fb-like" data-href="http://www.addinall.net/ehealth" 
                 data-send="false" data-layout="button_count" data-width="280" 
                 data-show-faces="true" data-font="tahoma">

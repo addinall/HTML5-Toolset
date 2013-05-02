@@ -190,8 +190,11 @@ require_once('oop/html5.php');                                      // load our 
                                                                     // using HTML5.  NO inline CSS allowed
             $application->close_column_one();                       // close of first column
             $application->add_column_two();                         // second screen part
-                $application->widgets->add_widget('social_buttons');// stick the various 'likes' in the column, 
-                                                                    // change this to suit
+                $application->widgets->add_widget('facebook');      // stick the various 'likes' in the column, 
+                $application->widgets->add_widget('pinterest');     // stupid pictures of cats
+                $application->widgets->add_widget('googleplus');    // the lads at GOOGLE use this in the SEO score...
+                                                                    // change this to suit or just empty the divs
+                                                                    // in the CSS descriptions
                 $application->cms_get('index', 'col_two');          // add the content
                 $application->widgets->add_widget('flickr');        // add a flickr widget, change this to suit
             $application->close_column_two();                       // and close it
