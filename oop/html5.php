@@ -74,7 +74,8 @@ private $tab_count;         // used to format generated HTML.  The code still
     public function __construct(CMS $content) {
 
         $this->content = $content;                  // make a private copy to use
-        $this->document = "<!DOCTYPE html5>\n\n";   // standard lead in
+        $this->document = "<!DOCTYPE html>\n\n";    // standard lead in
+        $this->document .= "<html>\n\n";            // ditto
         $this->ajax = FALSE;                        // turn off AJaX by default
     
     }
@@ -208,9 +209,9 @@ private $tab_count;         // used to format generated HTML.  The code still
     public function build_logo() {
 
 			$this->document .= $this->tabs($this->tab_count) . 
-                "h1 id='site-logo'>$this->content->get('index','logo')<a href='#'></a></h1> \n";
+                "h1 id='logo'>$this->content->get('index','logo')</h1> \n";
 			$this->document .= $this->tabs($this-tab_count) . 
-                "<h2 id='site-description'>$this->content->get('index', 'description')</h2> \n";
+                "<h2 id='description'>$this->content->get('index', 'description')</h2> \n";
 
     }
 
@@ -239,7 +240,10 @@ private $tab_count;         // used to format generated HTML.  The code still
     //-------------------------------
     public function close_headers() {
 
+        $this->tab_count--;
+        $this->document .= $this->tabs($this->tab_count) . "</header> \n";
 
+    
     }
 
 
