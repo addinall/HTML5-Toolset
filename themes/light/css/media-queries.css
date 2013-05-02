@@ -22,29 +22,25 @@
 */
 
 
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 1000px) {
 
-	/* pagewrap */
-	#pagewrap {
+	#wrapper {
 		width: 95%;
 	}
 
-	/* content */
-	#content {
+	#column-one {
 		width: 60%;
 		padding: 3% 4%;
 	}
 
-	/* sidebar */
-	#sidebar {
+	#column-two {
 		width: 30%;
 	}
-	#sidebar .widget {
+	#colum-two .widget {
 		padding: 8% 7%;
 		margin-bottom: 10px;
 	}
 
-	/* embedded videos */
 	.video embed,
 	.video object,
 	.video iframe {
@@ -57,12 +53,10 @@
 
 @media screen and (max-width: 650px) {
 
-	/* header */
 	#header {
 		height: auto;
 	}
 
-	/* search form */
 	#searchform {
 		position: absolute;
 		top: 5px;
@@ -77,42 +71,36 @@
 		width: 150px;
 	}
 
-	/* main nav */
-	#main-nav {
+	#navigation {
 		position: static;
 	}
 
-	/* site logo */
-	#site-logo {
+	#logo {
 		margin: 15px 100px 5px 0;
 		position: static;
 	}
 
-	/* site description */
-	#site-description {
+	#description {
 		margin: 0 0 15px;
 		position: static;
 	}
 
-	/* content */
-	#content {
+	#column-one {
 		width: auto;
 		float: none;
 		margin: 20px 0;
 	}
 
-	/* sidebar */
-	#sidebar {
+	#column-two {
 		width: 100%;
 		margin: 0;
 		float: none;
 	}
-	#sidebar .widget {
+	#column-two .widget {
 		padding: 3% 4%;
 		margin: 0 0 10px;
 	}
 
-	/* embedded videos */
 	.video embed,
 	.video object,
 	.video iframe {
@@ -123,13 +111,13 @@
 
 @media screen and (max-width: 480px) {
 
-	/* disable webkit text size adjust (for iPhone) */
+/* we are now in a smartphone!  */
+
 	html {
 		-webkit-text-size-adjust: none;
 	}
 
-	/* main nav */
-	#main-nav a {
+	#navigation a {
 		font-size: 90%;
 		padding: 10px 8px;
 	}

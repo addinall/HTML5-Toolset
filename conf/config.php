@@ -319,9 +319,9 @@ $configuration = New Config('addinall',                 // database username
                             'localhost',                // local host does it for 90% of installs
                             'mySQL',                    // mySQL, ORACLE, DB2, PostgreSQL so far (added Mongo)
                             '',                         // this is a socket() pointer returned by the DBMS
-                            'Light',                    // CSS3 Skin to use.  This can change on the fly
+                            'light',                    // CSS3 Skin to use.  This can change on the fly
                             '/var/www/html/newsite/',   // execution root directory, TRAILING SLASH IMPORTANT!
-                            'tmp/logs/',                // where to stick the error logs. NB trailing slash
+                            '/var/logs/',               // where to stick the error logs. NB trailing slash
                             'DEBUG',                    // level of verbosity, DEBUG, WORDY, SPARSE, SILENT
                             'deadrat');                 // operating system, deadrat, debian, windoze, bsd, solaris, zos
 
