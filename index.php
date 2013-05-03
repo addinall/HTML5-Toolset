@@ -129,6 +129,9 @@ require_once('conf/config.php');                                    // this has 
                                                                     // configuration options.  KISS.
 
 require_once('lib/prepare.inc');                                    // this is required by the IBM DB2 API
+                                                                    // it does not do anything if we are not
+                                                                    // a DB2 implementation.  Sets two constants
+                                                                    // otherwise.  No big deal.
 
 require_once('oop/error.php');                                      // error logging object
 require_once('oop/database.php');                                   // database connectivity object
@@ -175,7 +178,8 @@ require_once('oop/html5.php');                                      // load our 
                     $application->cms_get('index','hero');          // insert the content.  images and forms if
                 $application->close_heros();                        // shut down banner slider
             $application->close_header();                           // and close of the HEADER div
-            $applications->add_column_one();                        // this is a ONE to TWO column application,
+            $application->start_section();                          // just making W3C lint happy.  This seems to do.
+                $applications->add_column_one();                    // this is a ONE to TWO column application,
                                                                     // with the CSS theming, and the content that
                                                                     // has been added in the CMS system, the code here
                                                                     // doesn't change when developing a new application.
@@ -185,20 +189,47 @@ require_once('oop/html5.php');                                      // load our 
                                                                     // a THREE column model in the near future when
                                                                     // I have the RESPONSIVENESS mapped out without
                                                                     // errors on a few devices and screen sizes.
-                $application->cms_get('index', 'col_one');          // insert the content.  images and forms if
+
+                    while ($application->cms_get('index','articles',// get each article that is stored in the CMS and 
+                                                    'col_one'));    // insert the content.  images and forms if
                                                                     // used are directly coded into the content
-                                                                    // using HTML5.  NO inline CSS allowed
-            $application->close_column_one();                       // close of first column
-            $application->add_column_two();                         // second screen part
-                $application->widgets->add_widget('facebook');      // stick the various 'likes' in the column, 
-                $application->widgets->add_widget('pinterest');     // stupid pictures of cats
-                $application->widgets->add_widget('googleplus');    // the lads at GOOGLE use this in the SEO score...
+                                                                    // using HTML5.  NO inline CSS allowed.
+                                                                    // this is the first time we have examined the
+                                                                    // BOOLEAN value returned from cms_get
+                                                                    // now, from various places in the frame work
+                                                                    // the user can make an AJAX section like this
+                    $application->ajax( 'temperature.php',          // the server side code to send a request to
+                                        'GET',                      // POST or GET.  No RAW AJAX.  Makes it too hard to use
+                                        'temp_div',                 // the name of the division to be manipulated
+                                        'buttonclick',              // this tells our routine to display a button to hit
+                                                                    // this can be a mouse event or a keyboard event
+                                                                    // as well. 'keyup' 'mouseclick'
+                                        'Today Outside',            // button text.  Of course the look and feel are
+                                                                    // described in the CSS file of the theme we are using.
+                                                                    // if the type of event is NOT a buttonclick, this
+                                                                    // field is ignored
+                                        'Thermometer Broken');      // this indicates to our AJAX creation routine
+                                                                    // that we DO want to ALERT any errors, and display
+                                                                    // this message.  If this is empty we ignore
+                                                                    // jqXHR.fail events.
+                                                                    // it looks a little complex, but it allows the
+                                                                    // application programmer to generate multiple
+                                                                    // AJAX events in the application more or less
+                                                                    // at a whim.
+                $application->close_column_one();                   // close of first column
+            $application->end_section();                            // you can send a section id in that block
+            $application->start_section();                          // start_section will take an id=value
+                $application->add_column_two();                     // second screen part
+                    $application->widgets->add_widget('facebook');  // stick the various 'likes' in the column, 
+                    $application->widgets->add_widget('pinterest'); // stupid pictures of cats
+                    $application->widgets->add_widget('googleplus');// the lads at GOOGLE use this in the SEO score...
                                                                     // change this to suit or just empty the divs
                                                                     // in the CSS descriptions
-                $application->cms_get('index', 'col_two');          // add the content
-                $application->widgets->add_widget('flickr');        // add a flickr widget, change this to suit
-            $application->close_column_two();                       // and close it
-
+                    $application->cms_get('index','articles',
+                                                        'col_two'); // add the content
+                    $application->widgets->add_widget('flickr');    // add a flickr widget, change this to suit
+                $application->close_column_two();                   // and close it
+            $application->end_section();                            // end of <article>s
             $application->add_footer();                             // finally, add the footer
                 $application->cms_get('index', 'footer');           // add the content
             $application->close_footer();                           // and close it
