@@ -175,7 +175,7 @@ require_once('oop/html5.php');                                      // load our 
                     $application->build_navigation();               // build an unordered list of sorts
                 $application->close_navigation();                   // close off the menu
                 $application->add_heros();                          // HERO slider section, can be blank
-                    $application->cms_get('index','hero');          // insert the content.  images and forms if
+                    $application->cms_get(array('index','hero'));   // insert the content.  images and forms if
                 $application->close_heros();                        // shut down banner slider
             $application->close_header();                           // and close of the HEADER div
             $application->start_section();                          // just making W3C lint happy.  This seems to do.
@@ -190,8 +190,9 @@ require_once('oop/html5.php');                                      // load our 
                                                                     // I have the RESPONSIVENESS mapped out without
                                                                     // errors on a few devices and screen sizes.
                                                                     // now we get the articles stored by the CMS
-                    while ($application->cms_get('index','articles',// get each article that is stored in the CMS and 
-                                                    'col_one')){};  // insert the content.  images and forms if
+                    while ($application->cms_get(array('index',
+                                                         'articles',// get each article that is stored in the CMS and 
+                                                    'col_one'))){}; // insert the content.  images and forms if
                                                                     // used are directly coded into the content
                                                                     // using HTML5.  NO inline CSS allowed.
                                                                     // this is the first time we have examined the
@@ -225,8 +226,9 @@ require_once('oop/html5.php');                                      // load our 
                     $application->widgets->add_widget('googleplus');// the lads at GOOGLE use this in the SEO score...
                                                                     // change this to suit or just empty the divs
                                                                     // in the CSS descriptions
-                    while ($application->cms_get('index','articles',// again, let the function know we want articles
-                                                      'col_two')){};// add the content
+                    while ($application->cms_get(array('index',
+                                                        'articles', // again, let the function know we want articles
+                                                     'col_two'))){};// add the content
                     $application->widgets->add_widget('flickr');    // add a flickr widget, change this to suit
                 $application->close_column_two();                   // and close it
             $application->end_section();                            // end of <article>s
