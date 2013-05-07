@@ -265,6 +265,7 @@ private $tab_count;         // used to format generated HTML.  The code still
     // div_name         - DOM <div> for the result
     // optional text    - if this is to be a button event, the this will
     //                    be used as button text.  It may be used as a lable otherwise
+    //                    but generally not used
     // error_alarm      - generat a Javascript ALARM with this text on any
     //                    AJAX error.  If this field is blank, let the errors
     //                    through to the keeper
@@ -273,6 +274,18 @@ private $tab_count;         // used to format generated HTML.  The code still
     // and feel and placement/actions of any data returned by the AJAX
     // script is to be formatted by using the theme CSS constructs
     // on $div_name
+    //
+    // This is a general AJAX handler.  It is generally used for routines
+    // NOT RELATED TO SPECIFIC FORMS or LINKS.
+    //
+    // In the file forms.php, as part of the object FORM, there are more
+    // specific AJAX handlers that relate to specific dynamic forms being
+    // built and operated.
+    //
+    // This object's method is usually called on a DOCUMENT event, a key
+    // event or a mouse event and is generally tied to most if not all
+    // of the current document.
+
 
         $ajax = '';
 
@@ -280,8 +293,22 @@ private $tab_count;         // used to format generated HTML.  The code still
         $ajax =<<<EOT
             <div $div_name></div>
 
+            <script>
+                $('#wrapper).$event(function() {
+                    .$type($script, function(data) {
+                        $($div_name).empty().append(data)
+                    ).fail(function() {
+                        alert($error_alarm);
+                    })
+                });
+
+            </script>
+
 EOT;
 
+        $this->document .= $ajax;
+       
+        $this->add_comment('End of Automagically created AJAX function and div');
 
     }
 
