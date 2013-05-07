@@ -118,10 +118,11 @@ private $root_dir;          // execution root directory
 private $theme;             // CSS3 Skin to use.  This can change on the fly
 private $error_log;         // where to stick the error logs
 private $log_level;         // level of verbosity
+private $google;            // google analystics code reference
 private $os_type;           // which operating system for some low level functions
 
-    //-----------------------------------------------------------------------------------------------
-    function __construct($usr, $pass, $db, $host, $dbtype, $strm, $rdir, $css, $errl, $errlev, $os) {
+    //---------------------------------------------------------------------------------------------------------
+    function __construct($usr, $pass, $db, $host, $dbtype, $strm, $rdir, $css, $errl, $errlev, $google, $os) {
 
         $this->set_user($usr);
         $this->set_password($pass);
@@ -133,6 +134,7 @@ private $os_type;           // which operating system for some low level functio
         $this->set_theme($css);
         $this->set_errlog($errl);
         $this->set_errlevel($errlev);
+        $this->set_google($google);
         $this->set_os($os);
     }
 
@@ -263,6 +265,19 @@ private $os_type;           // which operating system for some low level functio
         return $this->log_level; 
     }
 
+
+    //-------------------------------------
+    public function set_google($google) {
+
+        $this->google = $google;
+    }
+
+    //---------------------------------
+    public function get_google() {
+
+        return $this->google; 
+    }
+
     //-------------------------------------
     public function set_os($os) {
 
@@ -323,6 +338,7 @@ $configuration = New Config('addinall',                 // database username
                             '/var/www/html/newsite/',   // execution root directory, TRAILING SLASH IMPORTANT!
                             '/var/logs/',               // where to stick the error logs. NB trailing slash
                             'DEBUG',                    // level of verbosity, DEBUG, WORDY, SPARSE, SILENT
+                            'UA-12345-XX',              // google analytics code
                             'deadrat');                 // operating system, deadrat, debian, windoze, bsd, solaris, zos
 
 ?>

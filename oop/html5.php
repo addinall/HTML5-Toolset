@@ -88,17 +88,62 @@ private $tab_count;         // used to format generated HTML.  The code still
         $this->document .= $this->tabs($this->tab_count) . 
                             "<meta charset='utf-8'> \n\n";
 
+        // make sure the latest version of IE is used in versions of IE that 
+        // contain multiple rendering engines. Even if a site visitor is using 
+        // IE8 or IE9, it's possible that they're not using the latest rendering 
+        // engine their browser contains.
+
+        $this->document .= '<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">' .
+                            "\n\n";
+
         // disable iPhone inital scale
         // and set up the view port area to reflect the size of the device we are on
 
         $this->document .= $this->tabs($this->tab_count) . 
                         "<meta name='viewport' content='width=device-width; initial-scale=1.0'> \n\n";
 
+        // this next field will be in the CMS.  Just sticking it in here for testing purposes.
+
         $this->document .= $this->tabs($this->tab_count) . 
                         "<title>Toolset v4.0 - HTML5/CSS3/jQuery - Mark Addinall</title> \n\n";
 
+        // OK.  The latest and greatest GOOGLE Analytics tracking code
+
+        $google =<<< EOT
+        <script>
+          var _gaq = [['_setAccount', "$this->content->config->get_google()"], ['_trackPageview']];
+            (function(d) {
+                    var g = d.createElement('script'),
+                            s = d.scripts[0];
+                                g.src = '//www.google-analytics.com/ga.js';
+                                    s.parentNode.insertBefore(g, s);
+                                      }(document));
+            </script>
+EOT;
+
+        $this->document .= $this->tabs($this-tab_count) . $google . "\n\n";
+
+
 
     }
+
+
+    //--------------------------------------------
+    public function micro_data($context, $value) {
+        
+        
+        // allow the application programmer to include
+        // micro data into the structure of the document.
+        // this is to appease the idiots at Google that
+        // just COULD NOT leave html5 CLEAN just for a few
+        // months at least.  Some dimwit at Google dreamed
+        // up a brand new ontology for the addition of
+        // structured data that goes to increase the SEO
+        // worthiness of the page(s).
+
+
+    }
+
 
     //---------------------------------
     public function load_javascript() {
@@ -325,20 +370,10 @@ EOT;
         $this->document .= "\n\n <!--  \n $comment \n --> \n\n";
 
     }
+    //---------------------
+    public function run() {
 
-    //--------------------------------------------
-    public function micro_data($context, $value) {
-        
-        
-        // allow the application programmer to include
-        // micro data into the structure of the document.
-        // this is to appease the idiots at Google that
-        // just COULD NOT leave html5 CLEAN just for a few
-        // months at least.  Some dimwit at Google dreamed
-        // up a brand new ontology for the addition of
-        // structured data that goes to increase the SEO
-        // worthiness of the page(s).
-
+        print($this->document);
 
     }
 
