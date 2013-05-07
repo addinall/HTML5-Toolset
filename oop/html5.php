@@ -248,8 +248,39 @@ private $tab_count;         // used to format generated HTML.  The code still
 
 
 
-    //--------------------------------------------------
-    public function implement_ajax($function_callback) {
+    //----------------------------------
+    public function ajax($script,
+                         $type,
+                         $div_name,
+                         $event,
+                         $optional_text,
+                         $error_alarm) {
+
+    // this method allows the application programmer a convenient
+    // way of implementing ajax DOM areas and functionality
+    // from within the application framework.
+    //
+    // script           - the name of the script of program to execute
+    // type             - POST or GET
+    // div_name         - DOM <div> for the result
+    // optional text    - if this is to be a button event, the this will
+    //                    be used as button text.  It may be used as a lable otherwise
+    // error_alarm      - generat a Javascript ALARM with this text on any
+    //                    AJAX error.  If this field is blank, let the errors
+    //                    through to the keeper
+    //
+    // Again, no formatting is done withing this code.  The look
+    // and feel and placement/actions of any data returned by the AJAX
+    // script is to be formatted by using the theme CSS constructs
+    // on $div_name
+
+        $ajax = '';
+
+
+        $ajax =<<<EOT
+            <div $div_name></div>
+
+EOT;
 
 
     }

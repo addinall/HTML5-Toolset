@@ -87,6 +87,7 @@
 // 12/02/2012 | Re-write v3.x new object model|  MA
 // 16/04/2013 | Re-write v4 new object model  |  MA
 // 02/05/2013 | Added support for Mongo noSQL |  MA
+// 08/05/2013 | Added an SQL Parser for Mongo |  MA
 //------------+-------------------------------+------------
 
 //-----------------
@@ -153,7 +154,9 @@ private     $db_type;           // the needs of different databases
 private     $password;          // change so on occasion some of
 private     $stream;            // this will remain empty for the
 private     $hostname;          // duration of the application
-private     $mongo_fp;
+
+private     $mongo_fp;          // no SQL has TWO streams associated with IO
+private     $parser;            // and an SQL parser fron end
 
     //------------------------------------------
     function __construct(ErrorLogger $logger) {
@@ -190,6 +193,31 @@ private     $mongo_fp;
         $this->hostname = $this->log_config->get_hostname();
         $this->stream   = 0;                                    // stream will come back from the DBMS
                                                                 // if a connection is made, we hope!
+
+        if ($this->db_type == 'DB2') {                          // are we on a big blue macine?
+            require_once('../lib/prepare.inc');                 // this is required by the IBM DB2 API
+        }                                                       // it does not do anything if we are not
+                                                                // a DB2 implementation.  Sets two constants
+
+       if ($this->db_type == 'Mongo') {                         // this will apply to other flavours of
+           require_once('parser.php');                          // noSQL.  As the syntax to generate queries
+           $this-parser = new Parser();                         // on a noSQL database is VERY different to
+       }                                                        // that of our other DBMS systems, I decided
+                                                                // to write a small SQL subset compiler/
+                                                                // interpreter that will parse SQL queries
+                                                                // into Mongo system calls via an iCode
+                                                                // stack.  This seems to be the best way
+                                                                // of allowing an application coder the
+                                                                // facility to use "Cloud" based (local or
+                                                                // otherwise) tools such as Mongo noSQL without
+                                                                // going to the trouble of learning the somewhat
+                                                                // tortured syntax.  After all, one of the
+                                                                // aims of a toolset/Framework is to provide
+                                                                // abstraction from the DBMS.  We do it between
+                                                                // RDBMS systems, so we just extend this
+                                                                // philosophy to cover noSQL.
+
+
 
         $this->connect() ;                                      // try to connect to the database
                                                                 // this level of abstraction will allow for
@@ -229,7 +257,7 @@ private     $mongo_fp;
                                                                 // BAH!  Just as it all got simpler!
                 $this->stream = $this->mongo_fp->{$this->database};
                 if (!$this->stream) {
-                    $this->log_config->error('Database not started : DBNAME failed', TRUE);
+                    $this->log_config->error('Database not started : Mongo DBNAME failed', TRUE);
                 }                                              
 
             }                                                   // end of  Mongo

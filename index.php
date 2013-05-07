@@ -81,6 +81,11 @@
 //              Markup CAN be added to the text that form the
 //              Content sections of the application, however
 //              I frown on this so DON'T DO IT.
+//
+//              Why is it heavily documented?  As well as being used
+//              for commercial application development, I also use
+//              my code libraries as teaching aides.
+//
 //-----------------------------------------------------------------------------
 //  Copyright (c) 2013, Mark Addinall - That's IT - QLD
 //  All rights reserved.
