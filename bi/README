@@ -1,0 +1,19 @@
+This directory should and will contain objects that contain methods that will implement the business logic of an application.
+
+Initially, routines like the mailer, session management, backup procedures will all reside in here.  And object that does not have a DIRECT entity relationship with a data object is classed as business intelligence.
+
+So, an instance of Class Administrator {} has a subsequent data base relationship, usually in a table [Administrators].  Conversely, the Mailer Class {} is indeed an OOP/OOD implementation of a mail() function within our application, it does NOT have a direct relationship with database tuples.
+
+Having a mailer built in to the database structures is just plain stupid, i.e.,
+
+$administrator->mail_out($message);
+
+But I have seen this, somewhat to my dismay.
+
+So we implement is like so:
+
+$mailer->send_to($administrator, $body);
+
+This paradigm REMOVES most of what is at fault with the current MVC architectures.  No more BITs of BI stuffed in the V, other BITs of it stuffed in the M and no-one is really sure what a C is supposed to do any more, so we can shove a BIT of BI in there as well.  Usually all disjointed.  In short, a mess.
+
+Start adding AJaX (well AJaJ really) and Javascript JSON manipulations into the MVC spagetti and things get REAL UGLY REAL FAST.

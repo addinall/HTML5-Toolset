@@ -9,4 +9,5 @@ This code is published under a BSD licence, but I would ask that you not copy it
 Thank you.
 Mark Addinall
 addinall@addinall.net
+http://addinall.github.io/HTML5-Toolset/
 

@@ -216,7 +216,7 @@ class CMS  {
 
 
     //---------------
-    function __construct() {
+    function __construct(DBMS $db) {
 
     // this object can be created in two different ways.
     // To create and define a brand new object to go into the
@@ -229,7 +229,7 @@ class CMS  {
     }
 
     //---------------------------------
-    public function add_content( $db )
+    public function add_content()
     {
     // add new web content into the database
     // the row nu (id) is auto generated
