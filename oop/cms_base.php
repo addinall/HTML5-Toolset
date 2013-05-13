@@ -4,7 +4,7 @@
 // CAPTAIN  SLOG
 //---------------------------------------------------------
 //
-//  FILE:       cms.php    
+//  FILE:       cms_base.php    
 //  SYSTEM:     New Tools 2013
 //  AUTHOR:     Mark Addinall
 //  DATE:       17/04/2013 
@@ -102,12 +102,90 @@
 
 
 
-require_once('cms_base.php');           // the primitive objects
-                                        // that go to build these CMS
-                                        // classes.
 
-//----------
-class CMS EXTENDS CMS_light  {
+
+
+
+//-------------
+class Primitive {
+
+
+// This is our entry level object.
+// All of the entities contained
+// in the database in this CMS
+// have these attributes.
+
+private     $id ;                               // row num
+
+private     $short_name ;                       // computer freindly name
+private     $active ;                           // is it alive?
+
+private     $created ;                          // when created?
+
+    //--------------------
+    function __construct($new) {
+
+        if ($new) {                             // is this a new entry into the CMS?
+            $this->created = date(DATE_RFC822); // this is a date-time stamp that
+                                                // conforms to the RFC822 format 
+                                                // it removes audit ambiguity
+                                                // only EVER used once, so not extended
+                                                // into a function or trait
+        }
+    }
+} // Primitive
+
+
+
+//--------------------------
+class Base extends Primitive
+{
+
+// This is our baseline object
+// model.  MOST entities in the 
+// database contain these attributes
+
+private     $name;          // what is this called?
+private     $description;   // standard stuff, what am I going to be
+private     $information;   // more blurb, usually use by applications
+private     $meta_data;     // this used to be called meta-data.
+                            // an importand field as dynamic, and to
+                            // an extent, self describing objects
+                            // within applications miss out on the current
+                            // partial ontology that is, web 2.0,
+                            // or, cloudy stuff.  A more practical use
+                            // is SEO.  Having objects tag themselves
+                            // as they wander through web space is a lot
+                            // more versatile than static XML gooballs.
+                            //
+                            // 2013 update.  Tags is going out of fashion
+                            // again and swinging back to meta-data and
+                            // brand new, micro-data.  Anbomination
+                            // dreamt up by the morons in GOOGLE to take
+                            // a brand new clean HTML5 model, and fuck it up.
+                            
+private     $modified ;     // and last modified.
+                            // these are private for security reasons
+                            // in regards to a data audit
+                            // we REALLY want to know when one of
+                            // our database objects changed.
+
+private     $image ;        // textual pointer to an image of the object
+                            // if applicable
+
+
+    //----------------------    
+    function __construct($new) {
+    }
+
+
+} // Base
+
+
+
+//-------------------------------
+class ContentEntry extends Base {
+
     // 2011 - This object has been used in several versions of
     // chameleon.  Now being used in eHealth.  I left the
     // above commenents in for MY historical purpose.
@@ -129,7 +207,7 @@ class CMS EXTENDS CMS_light  {
 
 
     //---------------
-    function __construct(DBMS $db) {
+    function __construct($new) {
 
     // this object can be created in two different ways.
     // To create and define a brand new object to go into the
@@ -140,7 +218,19 @@ class CMS EXTENDS CMS_light  {
 
     
     }
+
+class CMS_base extends ContentEntry {
+
+
+    function __construct($new) {
+
+
+    }
+
+
+
 }
+
 
 
 ?>

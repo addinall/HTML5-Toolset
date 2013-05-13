@@ -4,7 +4,7 @@
 // CAPTAIN  SLOG
 //---------------------------------------------------------
 //
-//  FILE:       cms.php    
+//  FILE:       cms_light.php    
 //  SYSTEM:     New Tools 2013
 //  AUTHOR:     Mark Addinall
 //  DATE:       17/04/2013 
@@ -107,7 +107,7 @@ require_once('cms_base.php');           // the primitive objects
                                         // classes.
 
 //----------
-class CMS EXTENDS CMS_light  {
+class CMS_light EXTENDS CMS_base  {
     // 2011 - This object has been used in several versions of
     // chameleon.  Now being used in eHealth.  I left the
     // above commenents in for MY historical purpose.
@@ -140,7 +140,49 @@ class CMS EXTENDS CMS_light  {
 
     
     }
-}
+
+    //---------------------------------
+    public function add_content()
+    {
+    // add new web content into the database
+    // the row nu (id) is auto generated
+    // the short_name MUST be unique or the SQL
+    // function wil fail.
+    // short_name is one of the primary keys into ALL
+    // of our tables.
+
+
+        $sql = "INSERT INTO content ( short_name, active, name, description, tags, created ) ". 
+                                    "VALUES( '$this->short_name', ".
+                                            "'$this->active', ".
+                                            "'$this->name', ".
+                                            "'$this->description', ".
+                                            "'$this->tags', ".
+                                            "'$this->created' )";
+
+        if ( $db->is_alive() )      // no use trying to add to a database
+        {                           // that is not turned on!
+            $db->execute( $sql ) ;  // doit.., execute has it's own error routines
+        }
+    } // add_content
+
+
+    //----------------------------------------  
+    public function get_content( $short_name, $db ) {
+    // fetch ONE content entry from the database
+    // and return it to calling entity
+
+        $sql = "SELECT * FROM content WHERE short_name = '$short_name'";
+
+        if ( $db->is_alive() )                  // no sense querying a dead database
+        {
+            $db->execute( $sql ) ;              // do it through the DB object
+        }
+    
+        $this->populate( $db->fetch() ) ;       // fetch returns a ROWTYPE object.
+                                                // we now populate THIS object
+                                                // with the column values from the row returned
+    }
 
 
 ?>
