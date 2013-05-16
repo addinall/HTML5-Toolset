@@ -218,7 +218,10 @@ class ContentEntry extends Base {
 
     
     }
+}
 
+
+//-----------------------------------
 class CMS_base extends ContentEntry {
 
 
@@ -226,8 +229,6 @@ class CMS_base extends ContentEntry {
 
 
     }
-
-
 
 }
 

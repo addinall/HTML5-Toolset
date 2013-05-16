@@ -90,6 +90,9 @@
 // 08/05/2013 | Added an SQL Parser for Mongo |  MA
 //------------+-------------------------------+------------
 
+
+require_once('parser.php');         // SQL front end for noSQL
+
 //-----------------
 class ResultArray {                 // little object looks kinda weird, it
                                     // serving as a container for an array
@@ -105,7 +108,7 @@ private $table = array();           // table of SQL results
 
     //----------------------------
     public function push($value) {
-        $this->table() = $value;    // PUSH onto stack.  PHP looks after
+        $this->table[] = $value;    // PUSH onto stack.  PHP looks after
     }                               // the memory management
 } // end ResultArray
 
@@ -201,7 +204,7 @@ private     $parser;            // and an SQL parser fron end
 
        if ($this->db_type == 'Mongo') {                         // this will apply to other flavours of
            require_once('parser.php');                          // noSQL.  As the syntax to generate queries
-           $this-parser = new Parser();                         // on a noSQL database is VERY different to
+           $this->parser = new Parser();                        // on a noSQL database is VERY different to
        }                                                        // that of our other DBMS systems, I decided
                                                                 // to write a small SQL subset compiler/
                                                                 // interpreter that will parse SQL queries
@@ -362,7 +365,7 @@ private     $parser;            // and an SQL parser fron end
         }
         //----------------------------------------------------------
         else if ($this->db_type == 'Mongo') {                           // Mongo LOOKS similar on the outside.
-            $result =
+            $result = 'To be announced';                                // I need to test the overall structure first
 
 
             if (!$result) {                                             // Mongo is flavour of the month so

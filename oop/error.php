@@ -329,8 +329,8 @@ private $trace_file;            // the system message file
 
     }
 
-    //---------------------
-    public get_errlevel() {
+    //------------------------------
+    public function get_errlevel() {
 
     // the error and trace reporting level.
     // this need to bubble all the way up
@@ -341,8 +341,8 @@ private $trace_file;            // the system message file
     }
 
 
-    //---------------
-    public get_os() {
+    //-------------------------
+    public function get_os() {
 
     // get the operating system
     // seldom used, but might have a use

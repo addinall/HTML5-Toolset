@@ -332,12 +332,13 @@ $configuration = New Config('addinall',                 // database username
                             'S0laris7.1',               // database password for the CMS
                             'chameleon',                // database name, qualified
                             'localhost',                // local host does it for 90% of installs
-                            'mySQL',                    // mySQL, ORACLE, DB2, PostgreSQL so far. Mongo and Orange added
+                            'NONE',                     // mySQL, ORACLE, DB2, PostgreSQL so far. Mongo and Orange added
                                                         // to use Amazon Web Services (the CLOUD).  Both of these 'new'
                                                         // DBMSs are actually really ols CISAM stuff.  Orange being
                                                         // a tricked up Berkeley database.  None of this 'ground
                                                         // breaking' Cloud stuff is really new.  The concepts and
-                                                        // the tools date back to the 70s.
+                                                        // the tools date back to the 70s.  Added NONE, bit of an
+                                                        // oversight on my part.
                             '',                         // this is a socket() pointer returned by the DBMS
                             'light',                    // CSS3 Skin to use.  This can change on the fly
                             '/var/www/html/newsite/',   // execution root directory, TRAILING SLASH IMPORTANT!
