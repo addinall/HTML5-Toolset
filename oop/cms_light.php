@@ -183,7 +183,7 @@ class CMS_light EXTENDS CMS_base  {
                                                 // we now populate THIS object
                                                 // with the column values from the row returned
     }
-
+}
 
 ?>
 

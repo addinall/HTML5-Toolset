@@ -54,7 +54,7 @@
 
 class FORMS {
 
-    __construct($level) {
+    function __construct($level) {
 
 
     }
