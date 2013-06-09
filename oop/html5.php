@@ -282,6 +282,7 @@ EOT;
     }
 
 
+
     //-------------------------------
     public function close_headers() {
 
@@ -289,6 +290,18 @@ EOT;
         $this->document .= $this->tabs($this->tab_count) . "</header> \n";
 
     
+    }
+
+    //-------------------------------------------
+    public function add_navigation($menu_items) {
+
+        
+        $this->document .= $this->tabs($this->tab_count) . "<nav> \n";
+        $this->tab_count++;
+
+
+        $this->tab_count--;
+        $this->document .= $this->tabs($this->tab_count) . "</nav> \n";
     }
 
 
