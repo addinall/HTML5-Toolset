@@ -180,7 +180,24 @@ require_once('oop/html5.php');                                      // load our 
                     $application->build_navigation();               // build an unordered list of sorts
                 $application->close_navigation();                   // close off the menu
                 $application->add_heros();                          // HERO slider section, can be blank
-                    $application->cms_get(array('index','hero'));   // insert the content.  images and forms if
+                    $application->cms_get(array('index','hero'));   // insert the content. 
+                                                                    // I have been asked "why send an array
+                                                                    // down to the function?".  For as much
+                                                                    // as I love OOD there is a place for the
+                                                                    // humble array, or list, or bag, or hash.
+                                                                    // It is by far the easiest way to send
+                                                                    // multiple arguments to a function.
+                                                                    // the CMS object(s) manipulate the
+                                                                    // database obviously, and depending where
+                                                                    // and when this manipulation is asked for,
+                                                                    // the arguments required can be usually
+                                                                    // 2..N, where N is not a very large number,
+                                                                    // but large enough to make coding a pain.
+                                                                    // using an array as an argument we can:
+                                                                    //    count()
+                                                                    //    sizeof()
+                                                                    //    foreach()
+                                                                    // making the code simple and understandable.
                 $application->close_heros();                        // shut down banner slider
             $application->close_header();                           // and close of the HEADER div
             $application->start_section();                          // just making W3C lint happy.  This seems to do.
