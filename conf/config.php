@@ -327,6 +327,9 @@ private $os_type;           // which operating system for some low level functio
 // 2.a &
 //
 // The system will spit and STOP.
+//
+
+// function __construct($usr, $pass, $db, $host, $dbtype, $strm, $rdir, $css, $errl, $errlev, $google, $os)
 
 $configuration = New Config('addinall',                 // database username
                             'S0laris7.1',               // database password for the CMS
@@ -340,9 +343,9 @@ $configuration = New Config('addinall',                 // database username
                                                         // the tools date back to the 70s.  Added NONE, bit of an
                                                         // oversight on my part.
                             '',                         // this is a socket() pointer returned by the DBMS
-                            'light',                    // CSS3 Skin to use.  This can change on the fly
                             '/var/www/html/newsite/',   // execution root directory, TRAILING SLASH IMPORTANT!
-                            '/var/logs/',               // where to stick the error logs. NB trailing slash
+                            'light',                    // CSS3 Skin to use.  This can change on the fly
+                            'logs/',                    // where to stick the error logs. NB trailing slash
                             'DEBUG',                    // level of verbosity, DEBUG, WORDY, SPARSE, SILENT
                             'UA-12345-XX',              // google analytics code
                             'deadrat');                 // operating system, deadrat, debian, windoze, bsd, solaris, zos

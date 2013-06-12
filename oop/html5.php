@@ -47,20 +47,9 @@
 //
 //
 
-//---------------------------------
-private function tabs($tab_count) {
-
-    // this is just an aide to provide us
-    // with "pretty printing" during HTML
-    // code generation.
-
-    return str_repeat("\t", $tab_count);
-}
-
-
 
 //----------------------
-class HTML5_document {
+class HTML5 {
 
 private $document;          // basic HTML document
 private $ajax;              // do we require AJaX?
@@ -80,10 +69,21 @@ private $tab_count;         // used to format generated HTML.  The code still
     
     }
 
+    //---------------------------------
+    private function tabs($tab_count) {
+
+        // this is just an aide to provide us
+        // with "pretty printing" during HTML
+        // code generation.
+
+        return str_repeat("\t", $tab_count);
+    }
+
+
     //----------------------------
     public function start_head() {
 
-        $this_document .= "<head>\n\n";
+        $this->document .= "<head>\n\n";
         $this->tab_count++;
         $this->document .= $this->tabs($this->tab_count) . 
                             "<meta charset='utf-8'> \n\n";
@@ -109,9 +109,12 @@ private $tab_count;         // used to format generated HTML.  The code still
 
         // OK.  The latest and greatest GOOGLE Analytics tracking code
 
+          echo $this->content->config->get_google();
+
+
         $google =<<< EOT
         <script>
-          var _gaq = [['_setAccount', "$this->content->config->get_google()"], ['_trackPageview']];
+          var _gaq = [['_setAccount', $this->content->config->get_google()], ['_trackPageview']];
             (function(d) {
                     var g = d.createElement('script'),
                             s = d.scripts[0];

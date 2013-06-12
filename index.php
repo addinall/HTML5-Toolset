@@ -238,7 +238,7 @@ require_once('oop/html5.php');                                      // load our 
                 $application->close_column_two();                   // and close it
             $application->end_section();                            // end of <article>s
             $application->add_footer();                             // finally, add the footer
-                $application->cms_get('index', 'footer');           // add the content
+                $application->cms_get(array('index', 'footer'));    // add the content
             $application->close_footer();                           // and close it
         $application->close_wrapper();                              // close out wrapper
     $application->close_body();                                     // close out the body

@@ -102,7 +102,7 @@
 
 
 
-require_once('cms_light.php');           // the primitive objects
+require_once('cms_light.php');          // the primitive objects
                                         // that go to build these CMS
                                         // classes.
 
