@@ -66,19 +66,59 @@
 //----------
 class Parser {
 
+// This is a REALLY minimalist SQL interpreter that takes
+// a VERY small subset of SQL and translates the statements
+// into a single, or a stack of noSQL functions calls.
+//
+// My major reason for implementing this is to keep the
+// data fetch routines the same/very similar in the higher
+// level objects that manage content load and store.
+//
+// The noSQL API is sufficiently weird and different to
+// make this framework hard to use for a novice.
 
-    //------------------------------------------
-    function __construct(ErrorLogger $logger) {
+private $sql_statement;                                         // copy of the incoming statement
+
+private $tokens = [ "select_sym"            => "SELECT",        // symbol table
+                    "insert_sym"            => "INSERT",
+                    "delete_sym"            => "DELETE",
+                    "update_sym"            => "UPDATE",
+                    "replace_sym"           => "REPLACE",
+                    "order_sym"             => "ORDER",
+                    "by_sym"                => "BY",
+                    "ascending_sym"         => "ASCENDING",
+                    "descending_sym"        => "DESCENDING",
+                    "where_sym"             => "WHERE",
+                    "lessthan_sym"          => "<",
+                    "greaterthan_sym"       => ">",
+                    "lessorequal_sym"       => "<=",
+                    "greaterorequal_sym"    => ">=",
+                    "equal_sym"             => "=",
+                    "notequal_sym"          => "<>",
+                    "lparen_sym"            => "(",
+                    "rparen_sym"            => ")",
+                    "semicolon_sym"         => ";" ];
+
+
+    //------------------------------------------------------
+    function __construct(ErrorLogger $logger, $statement) {
 
 
     } // constructor
 
 
+    //----------------
     function token() {
 
 
     }
 
+
+    //----------------
+    function parse() {
+
+
+    }
 
 } // class Parser 
 
