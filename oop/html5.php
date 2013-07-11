@@ -109,7 +109,7 @@ private $tab_count;         // used to format generated HTML.  The code still
 
         // OK.  The latest and greatest GOOGLE Analytics tracking code
 
-          echo $this->content->config->get_google();
+        echo $this->content->config->get_google();
 
 
         $google =<<< EOT

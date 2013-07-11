@@ -89,6 +89,7 @@ private $tokens = [ "select_sym"            => "SELECT",        // symbol table
                     "ascending_sym"         => "ASCENDING",
                     "descending_sym"        => "DESCENDING",
                     "where_sym"             => "WHERE",
+                    "values_sym"            => "VALUES",
                     "lessthan_sym"          => "<",
                     "greaterthan_sym"       => ">",
                     "lessorequal_sym"       => "<=",
@@ -107,8 +108,16 @@ private $tokens = [ "select_sym"            => "SELECT",        // symbol table
     } // constructor
 
 
-    //----------------
-    function token() {
+    //-----------------------------
+    private function expect($sym) {
+
+
+
+    }
+
+
+    //------------------------
+    private function token() {
 
 
     }

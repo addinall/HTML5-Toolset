@@ -107,7 +107,7 @@ require_once('cms_base.php');           // the primitive objects
                                         // classes.
 
 //----------
-class CMS_light EXTENDS CMS_base  {
+class CMS_light extends CMS_base  {
     // 2011 - This object has been used in several versions of
     // chameleon.  Now being used in eHealth.  I left the
     // above commenents in for MY historical purpose.
@@ -160,9 +160,9 @@ class CMS_light EXTENDS CMS_base  {
                                             "'$this->tags', ".
                                             "'$this->created' )";
 
-        if ( $db->is_alive() )      // no use trying to add to a database
+        if ($db->is_alive())        // no use trying to add to a database
         {                           // that is not turned on!
-            $db->execute( $sql ) ;  // doit.., execute has it's own error routines
+            $db->execute($sql) ;    // doit.., execute has it's own error routines
         }
     } // add_content
 
@@ -174,9 +174,9 @@ class CMS_light EXTENDS CMS_base  {
 
         $sql = "SELECT * FROM content WHERE short_name = '$short_name'";
 
-        if ( $db->is_alive() )                  // no sense querying a dead database
+        if ($db->is_alive())                    // no sense querying a dead database
         {
-            $db->execute( $sql ) ;              // do it through the DB object
+            $db->execute($sql) ;                // do it through the DB object
         }
     
         $this->populate( $db->fetch() ) ;       // fetch returns a ROWTYPE object.

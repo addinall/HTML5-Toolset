@@ -374,6 +374,16 @@ private     $parser;            // and an SQL parser fron end
             }                                                         
         }
         //----------------------------------------------------------
+        else if ($this->db_type == 'Redis') {                           // I added Redis July 2013 after seeing 
+            $result = 'To be announced';                                // a PHP5 app on a Redis data structure
+                                                                        // churning at 200,000 TPS and scaling
+                                                                        // up to 300,000,000 TPD!  So I decided
+            if (!$result) {                                             // that Redis is my choise for BIG DATA.
+                $this->log_config->error('Query failed: ' . $sql .      // I am leaving Mongo in because it is
+                                        ' : ' . pg_last_error(), TRUE); // popular ATM.  And I have already
+            }                                                           // done the work.
+        }
+        //----------------------------------------------------------
         else if ($this->db_type == 'ORACLE') {              
             $plan = oci_parse($this->stream, $sql);                     // OK, ORACLE is a little different            
             if (!$plan) {                                               // to mySQL and postgreSQL again. It has

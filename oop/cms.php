@@ -129,7 +129,7 @@ class CMS EXTENDS CMS_light  {
 
 
     //---------------
-    function __construct(DBMS $db) {
+    function __construct() {
 
     // this object can be created in two different ways.
     // To create and define a brand new object to go into the

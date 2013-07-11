@@ -112,7 +112,7 @@ private $user;              // who am I?
 private $password;          // database password for the CMS
 private $database;          // database name, qualified
 private $hostname;          // hostname, qualified
-private $db_type;           // mySQL, ORACLE, DB2, PostgreSQL so far (added Mongo)
+private $db_type;           // mySQL, ORACLE, DB2, PostgreSQL so far (added Mongo) (added redis)
 private $stream;            // this is a socket() pointer returned by the DBMS
 private $root_dir;          // execution root directory
 private $theme;             // CSS3 Skin to use.  This can change on the fly
@@ -335,13 +335,20 @@ $configuration = New Config('addinall',                 // database username
                             'S0laris7.1',               // database password for the CMS
                             'chameleon',                // database name, qualified
                             'localhost',                // local host does it for 90% of installs
-                            'NONE',                     // mySQL, ORACLE, DB2, PostgreSQL so far. Mongo and Orange added
-                                                        // to use Amazon Web Services (the CLOUD).  Both of these 'new'
-                                                        // DBMSs are actually really ols CISAM stuff.  Orange being
+                            'NONE',                     // mySQL, ORACLE, DB2, PostgreSQL so far. Mongo added
+                                                        // to use Amazon Web Services (the CLOUD).  These 'new'
+                                                        // DBMSs are actually really old CISAM stuff.  Orange being
                                                         // a tricked up Berkeley database.  None of this 'ground
                                                         // breaking' Cloud stuff is really new.  The concepts and
                                                         // the tools date back to the 70s.  Added NONE, bit of an
                                                         // oversight on my part.
+                                                        // Just added redis.  This one rocks! I just had a look
+                                                        // inside a site (no name unfortunately) that is running
+                                                        // a PHP5 app with a redis data structure that is serving
+                                                        // 300,000 TPS!!!  Errrrkkkk!  Scaling up to 200,000,000 TPD.
+                                                        // I was so impressed that I had to include this as my
+                                                        // BIG DATA option.  It makes even ORACLE look slow
+                                                        // and clumsy.
                             '',                         // this is a socket() pointer returned by the DBMS
                             '/var/www/html/newsite/',   // execution root directory, TRAILING SLASH IMPORTANT!
                             'light',                    // CSS3 Skin to use.  This can change on the fly
