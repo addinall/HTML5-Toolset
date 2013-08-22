@@ -37,6 +37,8 @@
 //
 //              The AJaX routines, DOM manipulation and dynamic forms are all
 //              coded using the jQuery Javascript library.
+//
+//              Testing moved this lot to Fedora 19 during August 2013
 //              
 //              It was developed using PHP 5.4.13 (cli)
 //              I like to debug on the command line.  MUCH
