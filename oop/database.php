@@ -249,6 +249,18 @@ private     $parser;            // and an SQL parser fron end
                                                                 // we are using that API
             }                                                   // end of mySQL
             //------------------------------------------------------------------------------------------
+            if ($this->db_type == 'MSSQL') {                    // have to include Microsoft 
+                $this->stream =                                 // the stream used to be a socket
+                new mssql_connect $this->hostname,              // since the re-write it is now an      
+                            $this->user,                        // mysqli database object.  Perhaps on
+                            $this->password);                   // the TO DO list is including mySQL
+                if (!$this->stream) {
+                    $this->log_config->error('Database not started : '
+                        . $stream->connect_error, TRUE);        // fail? quit with the error
+                }                                               // I like the msqli OOP implementation so
+                                                                // we are using that API
+            }                                                   // end of mySQL
+            //------------------------------------------------------------------------------------------
             if ($this->db_type == 'Mongo') {                    // cater for trendy new database
                 $this->mongo_fp =                               // looks a lot like old CISAM to me...
                     new mongo ( $this->hostname);               // wrapped up in an object.  I seem 
