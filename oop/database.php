@@ -368,6 +368,14 @@ private     $parser;            // and an SQL parser fron end
             }                                                           // to that handle or STREAM, therebye a
         }                                                               // script can open more than one database.
         //---------------------------------------------------------
+        if ($this->db_type == 'MSSQL') {                                // the Microsoft DBMS has got better 
+            $result = $this->stream->mssql_query($sql);                 // over the years.
+            if (!$result) {                                             // it gets a STREAM from a CONNECT
+                $this->log_config->error('Query failed: ' . $sql . ' ' .// function (now it is an object that
+                        $mssql->errno . "-" . $mssql->error . ' ');     // encapsulates the STREAM, and queries
+            }                                                           // to that handle or STREAM, therebye a
+        }                                                               // script can open more than one database.
+        //---------------------------------------------------------
         else if ($this->db_type == 'postgreSQL') {                      // postgreSQL is similar, although it
             $result = pg_query($sql);                                   // ignores the STREAM received from
             if (!$result) {                                             // CONNECT meaning that any one script
@@ -432,6 +440,9 @@ private     $parser;            // and an SQL parser fron end
     // UNIQUE row in a table.
 
         if ($this->db_type == 'mySQL') {
+
+        }
+        if ($this->db_type == 'MSSQL') {
 
         }
         else if ($this->db_type == 'Mongo') {
