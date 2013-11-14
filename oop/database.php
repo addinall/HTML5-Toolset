@@ -21,14 +21,6 @@
 //              statistical data gathering and reporting application
 //              to name a few.
 //
-//              In the previous incarnation of quicktools this application
-//              provides a number of different functions:
-//
-//              1. Machine health test (NOC) in various ways using SNMP and MIB traps.
-//              2. An asset register controlling resource an locations
-//              3. NOC ticket tracker
-//              4. NOC and beyond network diagram browsing
-//
 //              This incarnation has made it into a set of Web 2.0 tools that
 //              make up a FRAMEWORK for developing RESPONSIVE web pages over
 //              a number of different devices.  This file/object has become more
@@ -49,6 +41,51 @@
 //              ditto postgreSQL and ORACLE.  mySQL is built into the PHP distributions
 //              as that has been the usual suspect over the history of WAMP-LAMP
 //              development.
+//
+//              Just a note on noSQL and 'current' technologies.
+//              We really have travelled the full circle.
+//              "Hey instead of distributed processing, we will just build a BIG fucking
+//              room, stuff it full of mainframes, run up a VMS - TSO set of control,
+//              and SELL CPU cycles, Storage and network bandwidth as required!  What
+//              a NEAT NEW IDEA!  VERY SIMILAR to the 1960s-70s model.  In fact, identical.
+//              Let's think up some new trendy name for a VERY OLD computational model.
+//                  SaaS
+//                  PaaS
+//                  'The CLOUD'
+//              That sounds stupid enough to suck in the script kiddies, the HR department,
+//              low life recruitment twonks, anything in the guvmint, and assorted other
+//              low lifes...."
+//
+//              "I had another good idea.  Let's RE-INVENT ISAM databases, speed them up
+//              using tried and tested B+ Tree traversal routines through multiple indices
+//              (well documented in 'The Art of Computer Programming.  Vols 1,2 & 3.
+//              Knuth - 1966.
+//              Volume 1 – Fundamental Algorithms
+//                  Chapter 2 – Information Structures
+//                      2.3. Trees
+//                          2.3.1. Traversing Binary Trees
+//                          2.3.2. Binary Tree Representation of Trees
+//                          2.3.3. Other Representations of Trees
+//                          2.3.4. Basic Mathematical Properties of Trees
+//                              2.3.4.1. Free trees
+//                              2.3.4.2. Oriented trees
+//                              2.3.4.3. The "infinity lemma"
+//                              2.3.4.4. Enumeration of trees
+//                              2.3.4.5. Path length
+//                              2.3.4.6. History and bibliography
+//                          2.3.5. Lists and Garbage Collection
+//                      2.4. Multilinked Structures
+//                      2.5. Dynamic Storage Allocation
+//
+//                      Then we can write the API in some obscure implementation of a mixture
+//                      between B and LISP and call the thing
+//
+//                      'noSQL' - 'State of the Art' Database technology!!
+//
+//                      What a HOOT!
+//
+//              Anyway.  It is implemented.  I am sticking an SQL parser into the API.
+//
 //-----------------------------------------------------------------------------
 //  Copyright (c) 2013, Mark Addinall - That's IT - QLD
 //  All rights reserved.
@@ -143,7 +180,7 @@ class DBMS {
 // Investigating persistant LOCAL databases on
 // mobile devices.  The implementation of this
 // technology is a few minor versions in the future.
-// Possibly December 2013.
+// Possibly December 2013. -  Done.
 //
 
 
