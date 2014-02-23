@@ -54,7 +54,7 @@
 //                  'The CLOUD'
 //              That sounds stupid enough to suck in the script kiddies, the HR department,
 //              low life recruitment twonks, anything in the guvmint, and assorted other
-//              low lifes...."
+//              wannabees... 
 //
 //              "I had another good idea.  Let's RE-INVENT ISAM databases, speed them up
 //              using tried and tested B+ Tree traversal routines through multiple indices
@@ -87,7 +87,7 @@
 //              Anyway.  It is implemented.  I am sticking an SQL parser into the API.
 //
 //-----------------------------------------------------------------------------
-//  Copyright (c) 2013, Mark Addinall - That's IT - QLD
+//  Copyright (c) 2006..2013,2014 Mark Addinall - That's IT - QLD
 //  All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without
@@ -125,6 +125,7 @@
 // 16/04/2013 | Re-write v4 new object model  |  MA
 // 02/05/2013 | Added support for Mongo noSQL |  MA
 // 08/05/2013 | Added an SQL Parser for Mongo |  MA
+// 11/11/2013 | Back in. Distracted by work.  |  MA
 //------------+-------------------------------+------------
 
 
@@ -184,9 +185,9 @@ class DBMS {
 //
 
 
-private     $alive;
-private     $result;
-private     $log_config;
+private     $alive;		// is the database up?
+private     $result;		// the result of an SQL query
+private     $log_config;	// our log file configuration
 
 private     $user;              // these are all of the DB connect
 private     $database;          // variables
@@ -231,6 +232,7 @@ private     $parser;            // and an SQL parser fron end
         $this->db_type  = $this->log_config->get_dbtype();
         $this->password = $this->log_config->get_password();
         $this->hostname = $this->log_config->get_hostname();
+
         $this->stream   = 0;                                    // stream will come back from the DBMS
                                                                 // if a connection is made, we hope!
 
@@ -299,7 +301,7 @@ private     $parser;            // and an SQL parser fron end
             }                                                   // end of mySQL
             //------------------------------------------------------------------------------------------
             if ($this->db_type == 'Mongo') {                    // cater for trendy new database
-                $this->mongo_fp =                               // looks a lot like old CISAM to me...
+                $this->mongo_stream =                           // looks a lot like old CISAM to me...
                     new mongo ( $this->hostname);               // wrapped up in an object.  I seem 
                 if (!$this->mongo_fp) {
                     $this->log_config->error('Database not started : New mongo failed', TRUE);
@@ -313,6 +315,25 @@ private     $parser;            // and an SQL parser fron end
                 }                                              
 
             }                                                   // end of  Mongo
+            //------------------------------------------------------------------------------------------
+            if ($this->db_type == 'Redis') {                    // cater for another trendy new database
+               require "predis/autoload.php";
+		PredisAutoloader::register();
+ 
+		// since we connect to default setting localhost
+		// and 6379 port there is no need for extra
+		// configuration. If not then you can specify the
+		// scheme, host and port to connect as an array
+		// to the constructor.
+		try {
+    			$redis = new PredisClient();
+		}
+		catch (Exception $e) {
+                    $this->log_config->error('Database not started : REDIS failed   :' . $e->getMessage(); TRUE);
+
+                }                                              
+		$this-stream = $redis;
+            }                                                   // end of Redis 
             //------------------------------------------------------------------------------------------
             else if ($this->db_type == 'postgreSQL') {          // horrid old fashioned wreck of a database
 
@@ -485,6 +506,9 @@ private     $parser;            // and an SQL parser fron end
         else if ($this->db_type == 'Mongo') {
 
         }
+        else if ($this->db_type == 'Redis`') {
+
+        }
         else if ($this->db_type == 'postgreSQL') {
 
         }
@@ -513,6 +537,15 @@ private     $parser;            // and an SQL parser fron end
         if ($this->db_type == 'mySQL') {
 
         }
+        if ($this->db_type == 'MSSQL') {
+
+        }
+        else if ($this->db_type == 'Mongo') {
+
+        }
+        else if ($this->db_type == 'Redis`') {
+
+        }
         else if ($this->db_type == 'postgreSQL') {
 
         }
@@ -532,7 +565,13 @@ private     $parser;            // and an SQL parser fron end
         if ($this->db_type == 'mySQL') {
 
         }
+        if ($this->db_type == 'MSSQL') {
+
+        }
         else if ($this->db_type == 'Mongo') {
+
+        }
+        else if ($this->db_type == 'Redis`') {
 
         }
         else if ($this->db_type == 'postgreSQL') {
