@@ -125,11 +125,8 @@
 // 16/04/2013 | Re-write v4 new object model  |  MA
 // 02/05/2013 | Added support for Mongo noSQL |  MA
 // 08/05/2013 | Added an SQL Parser for Mongo |  MA
-<<<<<<< HEAD
 // 11/04/2014 | Back on the job.              |  MA
-=======
 // 11/11/2013 | Back in. Distracted by work.  |  MA
->>>>>>> 1f304aca2101e83ad8573b1a4530b17b01d4db52
 //------------+-------------------------------+------------
 
 
