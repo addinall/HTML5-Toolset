@@ -53,7 +53,7 @@
 //                  PaaS
 //                  'The CLOUD'
 //              That sounds stupid enough to suck in the script kiddies, the HR department,
-//              low life recruitment twonks, anything in the guvmint, and assorted other
+//              low life twonks, anything in the guvmint, and assorted other
 //              wannabees... 
 //
 //              "I had another good idea.  Let's RE-INVENT ISAM databases, speed them up
