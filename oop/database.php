@@ -126,7 +126,8 @@
 // 02/05/2013 | Added support for Mongo noSQL |  MA
 // 08/05/2013 | Added an SQL Parser for Mongo |  MA
 // 11/04/2014 | Back on the job.              |  MA
-// 11/11/2013 | Back in. Distracted by work.  |  MA
+// 11/06/2014 | Back in. Distracted by work.  |  MA
+// 29/07/2014 | Added Redis support, cache    |  MA
 //------------+-------------------------------+------------
 
 
@@ -199,6 +200,13 @@ private     $hostname;          // duration of the application
 
 private     $mongo_fp;          // no SQL has TWO streams associated with IO
 private     $parser;            // and an SQL parser fron end
+
+private     $db_cache;          // Redis can eithe be implemented
+                                // stand alone (not very interesting)
+                                // or as a high speed chache in between
+                                // the application API and the RDBMS of
+                                // choice.  At the moment, this varliable
+                                // is either 'Redis' or 'DONE'.
 
     //------------------------------------------
     function __construct(ErrorLogger $logger) {
@@ -317,24 +325,41 @@ private     $parser;            // and an SQL parser fron end
 
             }                                                   // end of  Mongo
             //------------------------------------------------------------------------------------------
-            if ($this->db_type == 'Redis') {                    // cater for another trendy new database
+            if (($this->db_type == 'Redis') || ($this->db_cache == 'Redis')){ 
                require "predis/autoload.php";
-		PredisAutoloader::register();
+
+                // I added Redis July 2013 after seeing 
+                // a PHP5 app on a Redis data structure
+                // churning at 200,000 TPS and scaling
+                // up to 300,000,000 TPD!  So I decided
+                // that Redis is my choise for BIG DATA.
+                // Redis is an in-memory key=>value
+                // DB that usually acts as a cache between
+                // PHP and one of the other RDBMs' here,
+                // although like Berkely DB, it CAN be 
+                // used stand alone.
+       
+		        PredisAutoloader::register();
  
-		// since we connect to default setting localhost
-		// and 6379 port there is no need for extra
-		// configuration. If not then you can specify the
-		// scheme, host and port to connect as an array
-		// to the constructor.
-		try {
-    			$redis = new PredisClient();
-		}
-		catch (Exception $e) {
-                    $this->log_config->error('Database not started : REDIS failed   :' . $e->getMessage(); TRUE);
+		        // since we connect to default setting localhost
+		        // and 6379 port there is no need for extra
+		        // configuration. If not then you can specify the
+		        // scheme, host and port to connect as an array
+		        // to the constructor.
+		        try {
+    			    $redis = new PredisClient();
+		        }
+		        catch (Exception $e) {
+                        $this->log_config->error('Database not started : REDIS failed   :' . $e->getMessage(); TRUE);
 
                 }                                              
-		$this-stream = $redis;
-            }                                                   // end of Redis 
+		        $this-stream = $redis;
+
+                if ($this->db_cache == "Redis") { 
+                    $this->db_cache = "DONE");
+                    $this->connect() ;                          // recurse and start the RDBMS now
+                }
+            }
             //------------------------------------------------------------------------------------------
             else if ($this->db_type == 'postgreSQL') {          // horrid old fashioned wreck of a database
 
@@ -458,9 +483,13 @@ private     $parser;            // and an SQL parser fron end
                                                                         // churning at 200,000 TPS and scaling
                                                                         // up to 300,000,000 TPD!  So I decided
             if (!$result) {                                             // that Redis is my choise for BIG DATA.
-                $this->log_config->error('Query failed: ' . $sql .      // I am leaving Mongo in because it is
-                                        ' : ' . pg_last_error(), TRUE); // popular ATM.  And I have already
-            }                                                           // done the work.
+                $this->log_config->error('Query failed: ' . $sql .      // 
+                                        ' : ' . pg_last_error(), TRUE); // Redis is an in-memory key=>value
+                                                                        // DB that usually acts as a cache between
+                                                                        // PHP and one of the other RDBMs' here,
+                                                                        // although like Berkely DB, it CAN be 
+                                                                        // used stand alone.
+            }                                                           
         }
         //----------------------------------------------------------
         else if ($this->db_type == 'ORACLE') {              

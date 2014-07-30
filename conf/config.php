@@ -58,7 +58,7 @@
 //------------+-------------------------------+------------
 // 22/03/2013 | Initial creation              |  MA
 //------------+-------------------------------+------------
-//
+// 30/07/2014 | Added Content type static     |  MA
 //
 
 //------------
@@ -89,7 +89,7 @@ class Config {
 //
 // So, the next object to be created after this
 // will be the error logger which will accept this object
-// by REFERENCE into its constuctor.  So, sort of
+// by REFERENCE into its constructor.  So, sort of
 // inheritance.
 //
 //  class Test {
@@ -105,8 +105,6 @@ class Config {
 //
 //
 //
-// Common database elements follow a polymorphism
-// paradigm as usual.
 
 private $user;              // who am I?
 private $password;          // database password for the CMS
@@ -335,7 +333,7 @@ $configuration = New Config('addinall',                 // database username
                             'S0laris7.1',               // database password for the CMS
                             'chameleon',                // database name, qualified
                             'localhost',                // local host does it for 90% of installs
-                            'NONE',                     // mySQL, MS-SQL, ORACLE, DB2, PostgreSQL so far. Mongo added
+                            'STATIC',                   // mySQL, MS-SQL, ORACLE, DB2, PostgreSQL so far. Mongo added
                                                         // to use Amazon Web Services (the CLOUD).  These 'new'
                                                         // DBMSs are actually really old CISAM stuff.  Orange being
                                                         // a tricked up Berkeley database.  None of this 'ground
@@ -349,6 +347,10 @@ $configuration = New Config('addinall',                 // database username
                                                         // I was so impressed that I had to include this as my
                                                         // BIG DATA option.  It makes even ORACLE look slow
                                                         // and clumsy.
+                                                        // Also added 'STATIC' so that this tool suite can be
+                                                        // used to build a web app with no database driven
+                                                        // CMS.  Dunno why anyone would want to, but it was
+                                                        // a request.....
                             '',                         // this is a socket() pointer returned by the DBMS
                             '/var/www/html/newsite/',   // execution root directory, TRAILING SLASH IMPORTANT!
                             'light',                    // CSS3 Skin to use.  This can change on the fly
